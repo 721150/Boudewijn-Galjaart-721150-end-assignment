@@ -1,0 +1,39 @@
+package nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models;
+
+import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.enums.Role;
+
+public class User {
+    private String firstName;
+    private String lastName;
+    private String username;
+    private String password;
+    private Role role;
+
+    public User(String firstName, String lastName, String username, String password, Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public Role getRole() {
+        return this.role;
+    }
+}

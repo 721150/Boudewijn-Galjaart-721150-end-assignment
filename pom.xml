@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                nl.inholland.javafundamentals.boudewijngaljaart721150endassignment/nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.HelloApplication
+                                nl.inholland.javafundamentals.boudewijngaljaart721150endassignment/nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
