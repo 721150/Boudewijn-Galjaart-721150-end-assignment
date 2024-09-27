@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartApplication;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.User;
-import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.enums.Role;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,14 +31,17 @@ public class LoginController {
 
     @FXML
     protected void setLoginButton(ActionEvent event) throws IOException {
-        if (validateUser(readUsername(), readPassword())) {
+        // Haal alle gebruikers op uit de "database"
+        Database database = new Database();
+        User user = findUser(usernameField.getText(), passwordField.getText(), database);
+        if (user != null) {
             // Openen van het nieuwe venster
             FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("main-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             MainController mainController = fxmlLoader.getController();
-            mainController.setUser(new User("test", "test", "test", "test", Role.SALES));
+            mainController.giveData(user, database);
             Stage stage = (Stage) loginButton.getScene().getWindow();
-            stage.setTitle("Application");
+            stage.setTitle("Fantastic Cinema");
             stage.setScene(scene);
             stage.show();
         }
@@ -49,32 +51,14 @@ public class LoginController {
         }
     }
 
-    @FXML
-    protected String readUsername() {
-        // Haal de gebruikersnaam op uit het tekstveld
-        return usernameField.getText();
-    }
-
-    @FXML
-    protected String readPassword() {
-        // Haal het wachtwoord op uit het wachtwoordveld
-        return passwordField.getText();
-    }
-
-    private boolean validateUser(String username, String password) {
-        // Bepaal of de combinatie van gebruikersnaam en wachtwoord voorkomt in de verzameling
-        List<User> users = loadUsers();
+    private User findUser(String username, String password, Database database) {
+        // Zoel maar eem gebruiker met de ingevulde gebruikersnaam en wachtwoord
+        List<User> users = database.getUsers();
         for (User user : users) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                return true;
+                return user;
             }
         }
-        return false;
-    }
-
-    private List<User> loadUsers(){
-        // Haal alle gebruikers op uit de "database"
-        Database allUsersData = new Database();
-        return allUsersData.getUsers();
+        return null;
     }
 }
