@@ -10,12 +10,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartApplication;
-import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.AllUsersData;
+import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.User;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.enums.Role;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LoginController {
@@ -32,18 +31,20 @@ public class LoginController {
     private Label invalidUserMessage;
 
     @FXML
-    protected void setLoginButton(ActionEvent event) throws IOException { // moet nog aan worden gewerkt
+    protected void setLoginButton(ActionEvent event) throws IOException {
         if (validateUser(readUsername(), readPassword())) {
             // Openen van het nieuwe venster
             FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("main-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
             MainController mainController = fxmlLoader.getController();
             mainController.setUser(new User("test", "test", "test", "test", Role.SALES));
-            Scene scene = new Scene(fxmlLoader.load());
             Stage stage = (Stage) loginButton.getScene().getWindow();
+            stage.setTitle("Application");
             stage.setScene(scene);
             stage.show();
         }
         else {
+            // Maak het bericht zichtbaar dat de verkeerde inloggegevens zijn ingevuld
             invalidUserMessage.setVisible(true);
         }
     }
@@ -73,7 +74,7 @@ public class LoginController {
 
     private List<User> loadUsers(){
         // Haal alle gebruikers op uit de "database"
-        AllUsersData allUsersData = new AllUsersData();
+        Database allUsersData = new Database();
         return allUsersData.getUsers();
     }
 }

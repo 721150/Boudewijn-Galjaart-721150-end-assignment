@@ -36,4 +36,8 @@ public class User {
     public Role getRole() {
         return this.role;
     }
+
+    public String getFullName() {
+        return this.firstName + " " + this.lastName;
+    }
 }

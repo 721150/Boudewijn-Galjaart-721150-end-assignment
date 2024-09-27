@@ -1,0 +1,54 @@
+/* De achtergrond- en tekstkleur van de loginknop instellen */
+#loginButton {
+    -fx-background-color: #1E90FF;
+    -fx-text-fill: #FFFFFF;
+}
+
+/* De kleur en dikte van de randen van het gebruikers- en wachtwoordveld instellen */
+#passwordField, #usernameField {
+    -fx-border-width: 2px;
+    -fx-border-style: solid;
+    -fx-border-color: #808080;
+}
+
+/* De kleur, grootte en dikte van de tekst Login instellen */
+#loginLabel {
+    -fx-font-weight: bold;
+    -fx-text-fill :#D3D3D3;
+    -fx-font-size: 24.0;
+}
+
+/* De tekstkleur van de foutmelding instellen */
+#invalidUserMessage {
+    -fx-text-fill: #FF0000
+}
+
+/* De achtergrond kleur van de HBar aanpassen van de menubalk instellen */
+#menuBarHBox {
+    -fx-background-color: #000000;
+}
+
+/* De grootte, dikte en kleur van de naam van de applicatie in de menubalk instellen */
+#nameOfSystem {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 26.0;
+    -fx-font-weight: bold;
+}
+
+/* De achtergrond- en tekstkleur em dikte van de tekst van de menuknoppen instellen*/
+#sellTicketsButton, #manageShowingsButton, #viewSalesHistoryButton {
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #737474;
+    -fx-font-weight: bold;
+}
+
+/* De tekstkleur en grootte van de welkomsttekst instellen*/
+#welcomeMassageWhiteName {
+    -fx-text-fill :#737474;
+    -fx-font-size: 24.0;
+}
+
+/* De achtergrondkleur van het scherm instellen */
+#mainScreenVBox {
+    -fx-background-color: #E6E6E6;
+}

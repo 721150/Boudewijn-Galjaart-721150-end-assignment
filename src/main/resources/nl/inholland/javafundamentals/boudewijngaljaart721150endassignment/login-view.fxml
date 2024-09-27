@@ -5,8 +5,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import java.net.URL?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.LoginController">
-  <columnConstraints>
+    <stylesheets>
+        <URL value="@css/style.css" />
+    </stylesheets>
+    <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="600.0" minWidth="10.0" prefWidth="254.0" />
   </columnConstraints>
   <rowConstraints>
@@ -18,30 +22,27 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <PasswordField fx:id="passwordField" promptText="Password" style="-fx-border-width: 2px; -fx-border-style: solid; -fx-border-color: #808080" GridPane.rowIndex="3">
+      <PasswordField fx:id="passwordField" promptText="Password" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="50.0" right="150.0" />
          </GridPane.margin>
       </PasswordField>
-      <Button fx:id="loginButton" mnemonicParsing="false" onAction="#setLoginButton" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #1E90FF; -fx-text-fill: #FFFFFF;" text="Login" GridPane.rowIndex="4">
+      <Button fx:id="loginButton" mnemonicParsing="false" onAction="#setLoginButton" prefHeight="25.0" prefWidth="80.0" text="Login" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets left="50.0" />
          </GridPane.margin>
       </Button>
-      <Label style="-fx-font-weight: bold" text="Login" textFill="#d3d3d3" GridPane.rowIndex="1">
+      <Label fx:id="loginLabel" text="Login" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="50.0" />
          </GridPane.margin>
-         <font>
-            <Font size="24.0" />
-         </font>
       </Label>
-      <TextField fx:id="usernameField" promptText="Username" style="-fx-border-width: 2px; -fx-border-style: solid; -fx-border-color: #808080" GridPane.rowIndex="2">
+      <TextField fx:id="usernameField" promptText="Username" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="50.0" right="150.0" />
          </GridPane.margin>
       </TextField>
-      <Label fx:id="invalidUserMessage" text="Invalid username/password combination" visible="false" style="-fx-text-fill: #FF0000" GridPane.rowIndex="5">
+      <Label fx:id="invalidUserMessage" text="Invalid username/password combination" visible="false" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="50.0" />
          </GridPane.margin>
