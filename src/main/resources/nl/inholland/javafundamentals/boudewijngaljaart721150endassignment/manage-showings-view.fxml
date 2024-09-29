@@ -17,10 +17,13 @@
          <padding>
             <Insets bottom="15.0" top="15.0" />
          </padding></Label>
-      <Label fx:id="roomNumberLabel" prefHeight="17.0" prefWidth="569.0" text="Room 1">
+      <Label fx:id="roomNumberLabel" prefHeight="17.0" prefWidth="870.0" text="Room 1">
          <VBox.margin>
             <Insets left="15.0" right="15.0" />
          </VBox.margin>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
       </Label>
        <TableView fx:id="showingsTableInformationTebleView" layoutX="21.0" layoutY="21.0" prefHeight="278.0" prefWidth="569.0">
         <columns>

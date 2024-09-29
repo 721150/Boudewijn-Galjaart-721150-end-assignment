@@ -27,21 +27,21 @@
                <HBox.margin>
                   <Insets />
                </HBox.margin></Label>
-            <Button fx:id="sellTicketsButton" alignment="BOTTOM_CENTER" mnemonicParsing="false" text="Sell tickets">
+            <Button fx:id="sellTicketsButton" onAction="#loadSellTicketsVBox" alignment="BOTTOM_CENTER" mnemonicParsing="false" text="Sell tickets">
                <HBox.margin>
                   <Insets left="100.0" top="60.0" />
                </HBox.margin>
                <padding>
                   <Insets bottom="5.0" left="25.0" right="25.0" top="5.0" />
                </padding></Button>
-            <Button fx:id="manageShowingsButton" alignment="BOTTOM_CENTER" mnemonicParsing="false" text="Manage showings">
+            <Button fx:id="manageShowingsButton" onAction="#loadManageShowingsVBox" alignment="BOTTOM_CENTER" mnemonicParsing="false" text="Manage showings">
                <HBox.margin>
                   <Insets left="1.0" top="60.0" />
                </HBox.margin>
                <padding>
                   <Insets bottom="5.0" left="25.0" right="25.0" top="5.0" />
                </padding></Button>
-            <Button fx:id="viewSalesHistoryButton" alignment="BOTTOM_CENTER" mnemonicParsing="false" text="View sales history">
+            <Button fx:id="viewSalesHistoryButton" onAction="#loadViewSalesHistoryVBox" alignment="BOTTOM_CENTER" mnemonicParsing="false" text="View sales history">
                <HBox.margin>
                   <Insets left="1.0" top="60.0" />
                </HBox.margin>
