@@ -4,8 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
+import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Manager;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.User;
-import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.enums.Role;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -46,7 +46,7 @@ public class MainController {
         welkomeMessageWhiteDate.setText(welkomeMessageWhiteDate.getText() + " " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
 
         // Bepaal de rol van de gebruiker en bepaal welke rechten deze heeft
-        if (this.user.getRole() == Role.MANAGEMENT) {
+        if (this.user instanceof Manager) {
             sellTicketsButton.setVisible(false);
         }
         else {
