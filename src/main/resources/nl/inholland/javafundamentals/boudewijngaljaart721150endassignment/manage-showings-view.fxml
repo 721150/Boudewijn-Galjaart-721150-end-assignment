@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="411.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.ManageShowingsController">
+    <stylesheets>
+        <URL value="@css/style.css" />
+    </stylesheets>
+    <children>
+      <Label fx:id="manageShowingsTitleLabel" prefHeight="43.0" prefWidth="271.0" text="Manage showings">
+         <VBox.margin>
+            <Insets left="15.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="15.0" top="15.0" />
+         </padding></Label>
+      <Label fx:id="roomNumberLabel" prefHeight="17.0" prefWidth="569.0" text="Room 1">
+         <VBox.margin>
+            <Insets left="15.0" right="15.0" />
+         </VBox.margin>
+      </Label>
+       <TableView fx:id="showingsTableInformationTebleView" layoutX="21.0" layoutY="21.0" prefHeight="278.0" prefWidth="569.0">
+        <columns>
+          <TableColumn prefWidth="141.99999940395355" text="Start" />
+          <TableColumn prefWidth="148.99998474121094" text="End" />
+          <TableColumn prefWidth="427.0000457763672" text="Title" />
+          <TableColumn prefWidth="150.33331298828125" text="Seats left" />
+        </columns>
+         <VBox.margin>
+            <Insets bottom="15.0" left="15.0" right="15.0" />
+         </VBox.margin>
+      </TableView>
+      <HBox prefHeight="51.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="addShowingButton" disable="true" mnemonicParsing="false" text="Add showing">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin></Button>
+            <Button fx:id="editShowingButton" disable="true" mnemonicParsing="false" text="Edit showing">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin></Button>
+            <Button fx:id="deleteShowingButton" mnemonicParsing="false" text="Delete showing">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin></Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>

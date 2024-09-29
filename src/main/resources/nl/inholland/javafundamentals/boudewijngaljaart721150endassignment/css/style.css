@@ -42,8 +42,8 @@
     -fx-font-weight: bold;
 }
 
-/* De tekstkleur en grootte van de welkomsttekst instellen*/
-#welcomeMassageWhiteName {
+/* De tekstkleur en grootte van de welkomsttekst en schermtekst instellen*/
+#welcomeMassageWhiteName, #manageShowingsTitleLabel {
     -fx-text-fill :#737474;
     -fx-font-size: 24.0;
 }
@@ -51,4 +51,30 @@
 /* De achtergrondkleur van het scherm instellen */
 #mainScreenVBox {
     -fx-background-color: #E6E6E6;
+}
+
+/* De kleur van de balk en tekst boven de tabel instellen */
+#roomNumberLabel {
+    -fx-background-color: #000000;
+    -fx-text-fill: #FFFFFF;
+}
+
+/* De achtergrondkleur van de toevoegen knop instellen */
+#addShowingButton {
+    -fx-background-color: #1E90FF;
+}
+
+/* De achtergrondkleur van de bewerken knop instellen */
+#editShowingButton {
+    -fx-background-color: #737474;
+}
+
+/* De achtergrondkleur van de verwijderen knop instellen */
+#deleteShowingButton {
+    -fx-background-color: #FF0000;
+}
+
+/* De tekstkleur van de toevoegen, bewerken en verwijderen knoppen instellen */
+#addShowingButton, #editShowingButton, #deleteShowingButton {
+    -fx-text-fill: #FFFFFF;
 }
