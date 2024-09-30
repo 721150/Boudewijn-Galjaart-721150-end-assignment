@@ -66,27 +66,32 @@ public class MainController {
     @FXML
     protected void loadManageShowingsVBox() throws IOException {
         // Toon het scherm voor het beheren van de voorstellingen in de VBox
-        loadShowingsVBox("manage-showings-view.fxml");
+        FXMLLoader fxmlLoader = loadShowingsVBox("manage-showings-view.fxml");
+        ManageShowingsController manageShowingsController = fxmlLoader.getController();
+        manageShowingsController.giveData(this.user, this.database);
     }
 
     @FXML
     protected void loadViewSalesHistoryVBox() throws IOException {
         // Toon het scherm voor het overzicht van de verkopen in de VBox
-        loadShowingsVBox("view-sales-history-view.fxml");
+        FXMLLoader fxmlLoader = loadShowingsVBox("view-sales-history-view.fxml");
+        ViewSalesHistoryController viewSalesHistoryController = fxmlLoader.getController();
+        viewSalesHistoryController.giveData(this.user, this.database);
     }
 
     @FXML
     protected void loadSellTicketsVBox() throws IOException {
         // Toon het scherm voor het betellen van de kaarten in de VBox
-        loadShowingsVBox("sell-tickets-view.fxml");
+        FXMLLoader fxmlLoader = loadShowingsVBox("sell-tickets-view.fxml");
+        SellTicketsController sellTicketsController = fxmlLoader.getController();
+        sellTicketsController.giveData(this.user, this.database);
     }
 
-    private void loadShowingsVBox(String name) throws IOException {
+    private FXMLLoader loadShowingsVBox(String name) throws IOException {
         // Toon het scherm in de VBox
         FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource(name));
         VBox vBox = fxmlLoader.load();
-        ManageShowingsController manageShowingsController = fxmlLoader.getController();
-        manageShowingsController.giveData(this.user, this.database);
         mainScreenVBox.getChildren().setAll(vBox);
+        return fxmlLoader;
     }
 }

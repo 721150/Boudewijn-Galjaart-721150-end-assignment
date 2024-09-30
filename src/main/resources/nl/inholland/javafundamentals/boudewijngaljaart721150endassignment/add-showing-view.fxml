@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<VBox prefHeight="411.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.AddShowingController">
+   <stylesheets>
+      <URL value="@css/style.css" />
+   </stylesheets>
+   <children>
+      <Label fx:id="addShowingTitleLabel" text="Add showing" />
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <TextField />
+            <Label text="Start date/time" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <DatePicker />
+                  <TextField />
+               </children>
+            </HBox>
+            <Label text="End date/time" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <DatePicker />
+                  <TextField />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" text="Button" />
+            <Button mnemonicParsing="false" text="Button" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
