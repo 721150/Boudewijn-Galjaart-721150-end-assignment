@@ -12,7 +12,7 @@ public class Show {
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.title = title;
-        this.seats = null;
+        this.seats = new Customer[12][6];
     }
 
     public LocalDateTime getStartDateTime() {

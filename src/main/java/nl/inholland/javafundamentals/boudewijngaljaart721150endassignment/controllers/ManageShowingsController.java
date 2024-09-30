@@ -3,15 +3,14 @@ package nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.contr
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartApplication;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
+import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Show;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.User;
 
 import java.io.IOException;
@@ -29,18 +28,33 @@ public class ManageShowingsController implements Initializable {
 
     private Database database;
 
-    private ObservableList<User> users; // datatype nog aanpassen
+    private ObservableList<Show> shows = FXCollections.observableArrayList();
 
     public void giveData(User user, Database database) {
         this.user = user;
         this.database = database;
-        this.users = FXCollections.observableArrayList(this.database.getUsers()); // datatype nog aanpassen
+        this.shows.setAll(this.database.getShows());
     }
 
     @FXML
     protected void addShowingButtonClick(ActionEvent actionEvent) throws IOException {
         // Toon het scherm voor het toevoegen van een voorstelling in de VBox
         FXMLLoader fxmlLoader = loadShowingsVBox("add-showing-view.fxml");
+    }
+
+    @FXML
+    protected void editShowingButtonClick(ActionEvent actionEvent) throws IOException {
+        // Toon het scherm voor het bewerken van een voorstelling in de VBox
+        FXMLLoader fxmlLoader = loadShowingsVBox("edit-showing-view.fxml");
+    }
+
+    @FXML
+    protected void deleteShowingButtonClick(ActionEvent actionEvent) throws IOException {
+        // Verwijder een voorstellign uit de VBox en verzameling (alleen indien geen kaarten zijn verkocht)
+        Show show = (Show)showingsTableInformationTebleView.getSelectionModel().getSelectedItem();
+        if (show.getNumberOfSeatsLeft() != 72) {
+            shows.remove(show);
+        }
     }
 
     private FXMLLoader loadShowingsVBox(String name) throws IOException {
@@ -53,6 +67,7 @@ public class ManageShowingsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        showingsTableInformationTebleView.setItems(this.users); // datatype nog aanpassen
+        // Toon de voorstellingen in de tabel
+        showingsTableInformationTebleView.setItems(this.shows);
     }
 }

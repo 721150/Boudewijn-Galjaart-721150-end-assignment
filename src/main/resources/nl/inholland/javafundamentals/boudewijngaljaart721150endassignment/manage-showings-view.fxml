@@ -45,7 +45,7 @@
           </TableColumn>
           <TableColumn prefWidth="150.33331298828125" text="Seats left" >
               <cellValueFactory>
-                  <PropertyValueFactory property="seats" />
+                  <PropertyValueFactory property="numberOfSeatsLeft" />
               </cellValueFactory>
           </TableColumn>
         </columns>
@@ -59,11 +59,11 @@
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin></Button>
-            <Button fx:id="editShowingButton" disable="true" mnemonicParsing="false" text="Edit showing">
+            <Button fx:id="editShowingButton" onAction="#editShowingButtonClick" disable="true" mnemonicParsing="false" text="Edit showing">
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin></Button>
-            <Button fx:id="deleteShowingButton" disable="true" mnemonicParsing="false" text="Delete showing">
+            <Button fx:id="deleteShowingButton" onAction="#deleteShowingButtonClick" disable="true" mnemonicParsing="false" text="Delete showing">
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin></Button>
