@@ -5,7 +5,7 @@
 }
 
 /* De kleur en dikte van de randen van het gebruikers- en wachtwoordveld instellen */
-#passwordField, #usernameField {
+#passwordField, #usernameField, #addShowingTitleTextFiels, #addShowingStartDateDatePicker, #addShowingEndDateDatePicker, #addShowingEndTimeTextFiels, #addShowingStartTimeTextFiels {
     -fx-border-width: 2px;
     -fx-border-style: solid;
     -fx-border-color: #808080;
@@ -65,7 +65,7 @@
 }
 
 /* De achtergrondkleur van de bewerken knop instellen */
-#editShowingButton {
+#editShowingButton, #cancelButton {
     -fx-background-color: #737474;
 }
 
@@ -75,6 +75,11 @@
 }
 
 /* De tekstkleur van de toevoegen, bewerken en verwijderen knoppen instellen */
-#addShowingButton, #editShowingButton, #deleteShowingButton {
+#addShowingButton, #editShowingButton, #deleteShowingButton, #cancelButton {
     -fx-text-fill: #FFFFFF;
+}
+
+/* De achtergrondkleur van de VBox instellen */
+#addDataVBox {
+    -fx-background-color: #FFFFFF;
 }

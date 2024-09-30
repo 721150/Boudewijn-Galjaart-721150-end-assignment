@@ -1,38 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import java.net.URL?>
 <VBox prefHeight="411.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.AddShowingController">
    <stylesheets>
       <URL value="@css/style.css" />
    </stylesheets>
    <children>
-      <Label fx:id="addShowingTitleLabel" text="Add showing" />
-      <VBox prefHeight="200.0" prefWidth="100.0">
+      <Label fx:id="addShowingTitleLabel" text="Add showing">
+         <VBox.margin>
+            <Insets left="15.0" top="15.0" />
+         </VBox.margin></Label>
+      <VBox fx:id="addDataVBox" prefHeight="200.0" prefWidth="100.0">
          <children>
-            <TextField />
-            <Label text="Start date/time" />
+            <TextField fx:id="addShowingTitleTextFiels" promptText="Title">
+               <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="300.0" top="15.0" />
+               </VBox.margin></TextField>
+            <Label text="Start date/time">
+               <VBox.margin>
+                  <Insets left="15.0" />
+               </VBox.margin></Label>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <DatePicker />
-                  <TextField />
+                  <DatePicker fx:id="addShowingStartDateDatePicker" promptText="Date (DD-MM-YYY)">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" top="5.0" />
+                     </HBox.margin></DatePicker>
+                  <TextField fx:id="addShowingStartTimeTextFiels" promptText="Time (HH:MM)">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin></TextField>
                </children>
             </HBox>
-            <Label text="End date/time" />
+            <Label text="End date/time">
+               <VBox.margin>
+                  <Insets left="15.0" />
+               </VBox.margin></Label>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <DatePicker />
-                  <TextField />
+                  <DatePicker fx:id="addShowingEndDateDatePicker" promptText="Date (DD-MM-YYY)">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" top="5.0" />
+                     </HBox.margin></DatePicker>
+                  <TextField fx:id="addShowingEndTimeTextFiels" promptText="Time (HH:MM)">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin></TextField>
                </children>
             </HBox>
          </children>
+         <VBox.margin>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </VBox.margin>
       </VBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
+            <Button fx:id="addShowingsButton" mnemonicParsing="false" text="Add showing">
+               <HBox.margin>
+                  <Insets left="15.0" right="15.0" top="15.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+               </padding></Button>
+            <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel">
+               <HBox.margin>
+                  <Insets top="15.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+               </padding></Button>
          </children>
       </HBox>
    </children>

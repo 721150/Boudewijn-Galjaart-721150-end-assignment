@@ -5,7 +5,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="411.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.ManageShowingsController">
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<VBox fx:id="mainScreenVBox" prefHeight="411.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.ManageShowingsController">
     <stylesheets>
         <URL value="@css/style.css" />
     </stylesheets>
@@ -27,10 +28,26 @@
       </Label>
        <TableView fx:id="showingsTableInformationTebleView" layoutX="21.0" layoutY="21.0" prefHeight="278.0" prefWidth="569.0">
         <columns>
-          <TableColumn prefWidth="141.99999940395355" text="Start" />
-          <TableColumn prefWidth="148.99998474121094" text="End" />
-          <TableColumn prefWidth="427.0000457763672" text="Title" />
-          <TableColumn prefWidth="150.33331298828125" text="Seats left" />
+          <TableColumn prefWidth="141.99999940395355" text="Start" >
+            <cellValueFactory>
+                <PropertyValueFactory property="startDateTime" />
+            </cellValueFactory>
+          </TableColumn>
+          <TableColumn prefWidth="148.99998474121094" text="End" >
+            <cellValueFactory>
+                <PropertyValueFactory property="endDateTime" />
+            </cellValueFactory>
+            </TableColumn>
+          <TableColumn prefWidth="427.0000457763672" text="Title" >
+              <cellValueFactory>
+                  <PropertyValueFactory property="title" />
+              </cellValueFactory>
+          </TableColumn>
+          <TableColumn prefWidth="150.33331298828125" text="Seats left" >
+              <cellValueFactory>
+                  <PropertyValueFactory property="seats" />
+              </cellValueFactory>
+          </TableColumn>
         </columns>
          <VBox.margin>
             <Insets bottom="15.0" left="15.0" right="15.0" />
@@ -38,7 +55,7 @@
       </TableView>
       <HBox prefHeight="51.0" prefWidth="600.0">
          <children>
-            <Button fx:id="addShowingButton" disable="true" mnemonicParsing="false" text="Add showing">
+            <Button fx:id="addShowingButton" onAction="#addShowingButtonClick" mnemonicParsing="false" text="Add showing">
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin></Button>
@@ -46,7 +63,7 @@
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin></Button>
-            <Button fx:id="deleteShowingButton" mnemonicParsing="false" text="Delete showing">
+            <Button fx:id="deleteShowingButton" disable="true" mnemonicParsing="false" text="Delete showing">
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin></Button>
