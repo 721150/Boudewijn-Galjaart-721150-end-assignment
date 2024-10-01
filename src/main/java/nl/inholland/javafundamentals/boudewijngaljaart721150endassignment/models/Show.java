@@ -1,6 +1,7 @@
 package nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Show {
     private LocalDateTime startDateTime;
@@ -15,11 +16,17 @@ public class Show {
         this.seats = new Customer[12][6];
     }
 
-    public LocalDateTime getStartDateTime() {
+    public String getStartDateTime() {
+        // Format van de datum en tijd omzetten
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        String startDateTime = this.startDateTime.format(formatter);
         return startDateTime;
     }
 
-    public LocalDateTime getEndDateTime() {
+    public String getEndDateTime() {
+        // Format van de datum en tijd omzetten
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        String endDateTime = this.endDateTime.format(formatter);
         return endDateTime;
     }
 
@@ -34,9 +41,11 @@ public class Show {
     public int getNumberOfSeatsLeft() {
         // Bereken het aantal vrije stoelen en geef dit terug
         int numberOfSeatsLeft = 0;
-        for (Customer[] seat : seats) {
-            if (seat == null) {
-                numberOfSeatsLeft += 1;
+        for (Customer[] row : seats) {
+            for (Customer seat : row) {
+                if (seat == null) {
+                    numberOfSeatsLeft += 1;
+                }
             }
         }
         return numberOfSeatsLeft;
@@ -54,7 +63,15 @@ public class Show {
         this.title = title;
     }
 
-    public void setSeats(Customer[][] seats) {
-        this.seats = seats;
+    public void addCustomer(Customer customer, int row, int col) {
+        if (seats[row][col] == null) {
+            seats[row][col] = customer;
+        }
+    }
+
+    public String getNumberOfSeatsLeftAndAvalableSeats() {
+        int numberOfSeatsLeft = getNumberOfSeatsLeft();
+        int availableSeats = this.seats.length * this.seats[0].length;
+        return numberOfSeatsLeft + "/" + availableSeats;
     }
 }

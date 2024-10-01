@@ -45,7 +45,7 @@
           </TableColumn>
           <TableColumn prefWidth="150.33331298828125" text="Seats left" >
               <cellValueFactory>
-                  <PropertyValueFactory property="numberOfSeatsLeft" />
+                  <PropertyValueFactory property="numberOfSeatsLeftAndAvalableSeats" />
               </cellValueFactory>
           </TableColumn>
         </columns>

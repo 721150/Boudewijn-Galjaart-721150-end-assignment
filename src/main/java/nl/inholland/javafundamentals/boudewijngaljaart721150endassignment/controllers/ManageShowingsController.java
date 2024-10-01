@@ -1,11 +1,13 @@
 package nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartApplication;
@@ -23,6 +25,12 @@ public class ManageShowingsController implements Initializable {
 
     @FXML
     private TableView showingsTableInformationTebleView;
+
+    @FXML
+    private Button editShowingButton;
+
+    @FXML
+    private Button deleteShowingButton;
 
     private User user;
 
@@ -52,7 +60,7 @@ public class ManageShowingsController implements Initializable {
     protected void deleteShowingButtonClick(ActionEvent actionEvent) throws IOException {
         // Verwijder een voorstellign uit de VBox en verzameling (alleen indien geen kaarten zijn verkocht)
         Show show = (Show)showingsTableInformationTebleView.getSelectionModel().getSelectedItem();
-        if (show.getNumberOfSeatsLeft() != 72) {
+        if (show.getNumberOfSeatsLeft() == 72) {
             shows.remove(show);
         }
     }
@@ -69,5 +77,17 @@ public class ManageShowingsController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Toon de voorstellingen in de tabel
         showingsTableInformationTebleView.setItems(this.shows);
+
+        // Zorg ervoor dat de knoppen weizigen en verwijderen alleen werken als er een item is geselecteerd
+        showingsTableInformationTebleView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                editShowingButton.setDisable(false);
+                deleteShowingButton.setDisable(false);
+            } else {
+                editShowingButton.setDisable(true);
+                deleteShowingButton.setDisable(true);
+            }
+        });
     }
+
 }
