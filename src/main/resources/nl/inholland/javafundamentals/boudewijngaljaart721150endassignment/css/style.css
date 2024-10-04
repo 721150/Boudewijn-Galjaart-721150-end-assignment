@@ -19,7 +19,7 @@
 }
 
 /* De tekstkleur van de foutmelding instellen */
-#invalidUserMessage {
+#invalidUserMessage, #deleteFailMessage, #invalitDataMessage {
     -fx-text-fill: #FF0000
 }
 

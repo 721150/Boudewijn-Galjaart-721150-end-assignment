@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartApplication;
@@ -12,11 +13,9 @@ import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.User;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class AddShowingController {
     @FXML
@@ -37,6 +36,9 @@ public class AddShowingController {
     @FXML
     private TextField addShowingTitleTextFiels;
 
+    @FXML
+    private Label invalitDataMessage;
+
     private User user;
 
     private Database database;
@@ -50,15 +52,30 @@ public class AddShowingController {
     protected void addButtonClick(ActionEvent event) throws IOException {
         // Haal de gegevens op uit het scherm
         String title = addShowingTitleTextFiels.getText();
-        LocalDate startDate = addShowingStartDateDatePicker.getValue();
-        LocalDate endDate = addShowingEndDateDatePicker.getValue();
-        String startTime = addShowingStartTimeTextFiels.getText();
-        String endTime = addShowingEndTimeTextFiels.getText();
+        LocalDateTime startDateTime;
+        LocalDateTime endDateTime;
+        LocalTime startTime;
+        LocalTime endTime;
+        try {
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+            startTime = LocalTime.parse(addShowingStartTimeTextFiels.getText(), timeFormatter);
+            endTime = LocalTime.parse(addShowingEndTimeTextFiels.getText(), timeFormatter);
+        } catch (Exception exception) {
+            // Toon een foutmelding dat een verkeert format voor de datum wordt gebruikt
+            invalitDataMessage.setVisible(true);
+            invalitDataMessage.setText("Incorrect format time, use HH:MM. Such as 13:15.");
+            return;
+        }
 
         // Voeg de datum en tijd samen in een LocalDateTime
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalDateTime startDateTime = LocalDateTime.of(startDate, LocalTime.parse(startTime, timeFormatter));
-        LocalDateTime endDateTime = LocalDateTime.of(endDate, LocalTime.parse(endTime, timeFormatter));
+        try {
+            startDateTime = LocalDateTime.of(addShowingStartDateDatePicker.getValue(), startTime);
+            endDateTime = LocalDateTime.of(addShowingEndDateDatePicker.getValue(), endTime);
+        } catch (Exception exception) {
+            invalitDataMessage.setVisible(true);
+            invalitDataMessage.setText("Incorrect format date, use DD-MM-YYYY. Such as 12-04-2024.");
+            return;
+        }
 
         // Maak een nieuwe voorstelling aan en voeg deze toe aan de tijdelijke "database"
         Show newShow = new Show(startDateTime, endDateTime, title);

@@ -59,20 +59,25 @@
       </VBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button fx:id="addShowingsButton" onAction="#addButtonClick" mnemonicParsing="false" text="Add showing">
+            <Button fx:id="addShowingsButton" mnemonicParsing="false" onAction="#addButtonClick" text="Add showing">
                <HBox.margin>
                   <Insets left="15.0" right="15.0" top="15.0" />
                </HBox.margin>
                <padding>
                   <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                </padding></Button>
-            <Button fx:id="cancelButton" onAction="#cancelButtonClick" mnemonicParsing="false" text="Cancel">
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelButtonClick" text="Cancel">
                <HBox.margin>
                   <Insets top="15.0" />
                </HBox.margin>
                <padding>
                   <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
                </padding></Button>
+            <Label fx:id="invalitDataMessage" visible="false" text="">
+               <HBox.margin>
+                  <Insets left="15.0" top="15.0" />
+               </HBox.margin>
+            </Label>
          </children>
       </HBox>
    </children>

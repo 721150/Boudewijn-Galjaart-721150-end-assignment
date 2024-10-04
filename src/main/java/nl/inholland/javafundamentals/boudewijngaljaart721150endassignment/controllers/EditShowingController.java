@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartApplication;
@@ -12,7 +13,6 @@ import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.User;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -36,6 +36,9 @@ public class EditShowingController {
     @FXML
     private TextField editShowingTitleTextFiels;
 
+    @FXML
+    private Label invalitDataMessage;
+
     private User user;
 
     private Database database;
@@ -53,19 +56,34 @@ public class EditShowingController {
     protected void editButtonClick(ActionEvent event) throws IOException { // aanpassen
         // Haal de gegevens op uit het scherm
         String title = editShowingTitleTextFiels.getText();
-        LocalDate startDate = editShowingStartDateDatePicker.getValue();
-        LocalDate endDate = editShowingEndDateDatePicker.getValue();
-        String startTime = editShowingStartTimeTextFiels.getText();
-        String endTime = editShowingEndTimeTextFiels.getText();
+        LocalDateTime startDateTime;
+        LocalDateTime endDateTime;
+        LocalTime startTime;
+        LocalTime endTime;
+        try {
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+            startTime = LocalTime.parse(editShowingStartTimeTextFiels.getText(), timeFormatter);
+            endTime = LocalTime.parse(editShowingEndTimeTextFiels.getText(), timeFormatter);
+        } catch (Exception exception) {
+            // Toon een foutmelding dat een verkeert format voor de datum wordt gebruikt
+            invalitDataMessage.setVisible(true);
+            invalitDataMessage.setText("Incorrect format time, use HH:MM. Such as 13:15.");
+            return;
+        }
 
         // Voeg de datum en tijd samen in een LocalDateTime
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalDateTime startDateTime = LocalDateTime.of(startDate, LocalTime.parse(startTime, timeFormatter));
-        LocalDateTime endDateTime = LocalDateTime.of(endDate, LocalTime.parse(endTime, timeFormatter));
+        try {
+            startDateTime = LocalDateTime.of(editShowingStartDateDatePicker.getValue(), startTime);
+            endDateTime = LocalDateTime.of(editShowingEndDateDatePicker.getValue(), endTime);
+        } catch (Exception exception) {
+            invalitDataMessage.setVisible(true);
+            invalitDataMessage.setText("Incorrect format date, use DD-MM-YYYY. Such as 12-04-2024.");
+            return;
+        }
 
         // Maak een nieuwe voorstelling aan en voeg deze toe aan de tijdelijke "database"
         Show editShow = new Show(startDateTime, endDateTime, title, this.show.getSeats());
-        this.database.editShow(this. show, editShow);
+        this.database.editShow(this.show, editShow);
 
         // Open het overzicht om de voorstellingen te beheren
         openManageShowingsScreen();

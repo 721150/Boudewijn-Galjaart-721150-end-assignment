@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartApplication;
@@ -31,6 +32,9 @@ public class ManageShowingsController implements Initializable {
 
     @FXML
     private Button deleteShowingButton;
+
+    @FXML
+    private Label deleteFailMessage;
 
     private User user;
 
@@ -65,8 +69,12 @@ public class ManageShowingsController implements Initializable {
     protected void deleteShowingButtonClick(ActionEvent actionEvent) throws IOException {
         // Verwijder een voorstellign uit de VBox en verzameling (alleen indien geen kaarten zijn verkocht)
         Show show = (Show)showingsTableInformationTebleView.getSelectionModel().getSelectedItem();
-        if (show.getNumberOfSeatsLeft() == 72) {
+        if (show.getNumberOfSeatsLeft() == show.getTotalNumberOfSeats()) {
             shows.remove(show);
+        }
+        else {
+            // Toon het bericht dat een voorstelling niet kan worden verwijderd
+            deleteFailMessage.setVisible(true);
         }
     }
 

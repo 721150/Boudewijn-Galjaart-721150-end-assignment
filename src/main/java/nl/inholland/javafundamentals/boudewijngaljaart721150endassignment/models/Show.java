@@ -107,4 +107,15 @@ public class Show {
         int availableSeats = this.seats.length * this.seats[0].length;
         return numberOfSeatsLeft + "/" + availableSeats;
     }
+
+    public int getTotalNumberOfSeats() {
+        // Bereken het aantal stoelen en geef dit terug
+        int numberOfSeats = 0;
+        for (Customer[] row : seats) {
+            for (Customer seat : row) {
+                numberOfSeats += 1;
+            }
+        }
+        return numberOfSeats;
+    }
 }
