@@ -1,6 +1,8 @@
 package nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Show {
@@ -16,6 +18,13 @@ public class Show {
         this.seats = new Customer[12][6];
     }
 
+    public Show(LocalDateTime startDateTime, LocalDateTime endDateTime, String title, Customer[][] seats) {
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+        this.title = title;
+        this.seats = seats;
+    }
+
     public String getStartDateTime() {
         // Format van de datum en tijd omzetten
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
@@ -28,6 +37,30 @@ public class Show {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         String endDateTime = this.endDateTime.format(formatter);
         return endDateTime;
+    }
+
+    public String getStartTime() {
+        // Format van de tijd omzetten en de datum weglaten
+        LocalTime startTime = this.startDateTime.toLocalTime();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        return startTime.format(formatter);
+    }
+
+    public String getEndTime() {
+        // Format van de tijd omzetten en de datum weglaten
+        LocalTime endTime = this.endDateTime.toLocalTime();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        return endTime.format(formatter);
+    }
+
+    public LocalDate getStartDate() {
+        // Format van de datum omzetten en de tijd weglaten
+        return this.startDateTime.toLocalDate();
+    }
+
+    public LocalDate getEndDate() {
+        // Format van de datum omzetten en de tijd weglaten
+        return this.endDateTime.toLocalDate();
     }
 
     public String getTitle() {

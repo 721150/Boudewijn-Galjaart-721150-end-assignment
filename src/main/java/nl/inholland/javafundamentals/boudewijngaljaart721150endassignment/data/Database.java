@@ -33,10 +33,27 @@ public class Database {
     }
 
     public List<User> getUsers() {
+        // Geef alle gebruikers door
         return this.users;
     }
 
     public List<Show> getShows() {
+        // Geef alle voorstellingen door
         return this.shows;
+    }
+
+    public void addShow(Show show) {
+        // Voeg een voorstelling toe aan de lijst met voorstellingen
+        this.shows.add(show);
+    }
+
+    public void editShow(Show show, Show editSchow) {
+        // Wijzig de gegevens van een voorstelling in de lijst met voorstellingen
+        for (int i = 0; i < this.shows.size(); i++) {
+            if (this.shows.get(i).equals(show)) {
+                this.shows.set(i, editSchow);
+                break;
+            }
+        }
     }
 }

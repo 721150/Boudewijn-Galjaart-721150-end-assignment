@@ -48,12 +48,17 @@ public class ManageShowingsController implements Initializable {
     protected void addShowingButtonClick(ActionEvent actionEvent) throws IOException {
         // Toon het scherm voor het toevoegen van een voorstelling in de VBox
         FXMLLoader fxmlLoader = loadShowingsVBox("add-showing-view.fxml");
+        AddShowingController addShowingController = fxmlLoader.getController();
+        addShowingController.giveData(this.user, this.database);
     }
 
     @FXML
     protected void editShowingButtonClick(ActionEvent actionEvent) throws IOException {
         // Toon het scherm voor het bewerken van een voorstelling in de VBox
         FXMLLoader fxmlLoader = loadShowingsVBox("edit-showing-view.fxml");
+        EditShowingController editShowingController = fxmlLoader.getController();
+        Show show = (Show)showingsTableInformationTebleView.getSelectionModel().getSelectedItem();
+        editShowingController.giveData(this.user, this.database, show);
     }
 
     @FXML
