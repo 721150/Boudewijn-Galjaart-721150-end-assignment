@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartApplication;
+import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.enums.Screen;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Show;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.User;
@@ -51,18 +52,14 @@ public class ManageShowingsController implements Initializable {
     @FXML
     protected void addShowingButtonClick(ActionEvent actionEvent) throws IOException {
         // Toon het scherm voor het toevoegen van een voorstelling in de VBox
-        FXMLLoader fxmlLoader = loadShowingsVBox("add-showing-view.fxml");
-        AddShowingController addShowingController = fxmlLoader.getController();
-        addShowingController.giveData(this.user, this.database);
+        loadShowingsVBox(null, Screen.ADD);
     }
 
     @FXML
     protected void editShowingButtonClick(ActionEvent actionEvent) throws IOException {
         // Toon het scherm voor het bewerken van een voorstelling in de VBox
-        FXMLLoader fxmlLoader = loadShowingsVBox("edit-showing-view.fxml");
-        EditShowingController editShowingController = fxmlLoader.getController();
         Show show = (Show)showingsTableInformationTebleView.getSelectionModel().getSelectedItem();
-        editShowingController.giveData(this.user, this.database, show);
+        loadShowingsVBox(show, Screen.EDIT);
     }
 
     @FXML
@@ -78,12 +75,13 @@ public class ManageShowingsController implements Initializable {
         }
     }
 
-    private FXMLLoader loadShowingsVBox(String name) throws IOException {
+    private void loadShowingsVBox(Show show, Screen screen) throws IOException {
         // Toon het scherm in de VBox
-        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource(name));
+        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("add-showing-view.fxml"));
         VBox vBox = fxmlLoader.load();
         mainScreenVBox.getChildren().setAll(vBox);
-        return fxmlLoader;
+        AddShowingController addShowingController = fxmlLoader.getController();
+        addShowingController.giveData(this.user, this.database, show, screen);
     }
 
     @Override

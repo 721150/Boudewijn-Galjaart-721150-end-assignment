@@ -13,43 +13,51 @@
       <Label fx:id="addShowingTitleLabel" text="Add showing">
          <VBox.margin>
             <Insets left="15.0" top="15.0" />
-         </VBox.margin></Label>
-      <VBox fx:id="addDataVBox" prefHeight="200.0" prefWidth="100.0">
+         </VBox.margin>
+      </Label>
+      <VBox fx:id="dataVBox" prefHeight="200.0" prefWidth="100.0">
          <children>
-            <TextField fx:id="addShowingTitleTextFiels" promptText="Title">
+            <TextField fx:id="titleTextField" promptText="Title">
                <VBox.margin>
                   <Insets bottom="15.0" left="15.0" right="300.0" top="15.0" />
-               </VBox.margin></TextField>
+               </VBox.margin>
+            </TextField>
             <Label text="Start date/time">
                <VBox.margin>
                   <Insets left="15.0" />
-               </VBox.margin></Label>
+               </VBox.margin>
+            </Label>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <DatePicker fx:id="addShowingStartDateDatePicker" onAction="#addStartDatumDatumPickerClick" promptText="Date (DD-MM-YYY)">
+                  <DatePicker fx:id="startDateDatePicker" onAction="#addStartDatumDatumPickerClick" promptText="Date (DD-MM-YYY)">
                      <HBox.margin>
                         <Insets left="15.0" right="15.0" top="5.0" />
-                     </HBox.margin></DatePicker>
-                  <TextField fx:id="addShowingStartTimeTextFiels" promptText="Time (HH:MM)">
+                     </HBox.margin>
+                  </DatePicker>
+                  <TextField fx:id="startTimeTextField" promptText="Time (HH:MM)">
                      <HBox.margin>
                         <Insets top="5.0" />
-                     </HBox.margin></TextField>
+                     </HBox.margin>
+                  </TextField>
                </children>
             </HBox>
             <Label text="End date/time">
                <VBox.margin>
                   <Insets left="15.0" />
-               </VBox.margin></Label>
+               </VBox.margin>
+            </Label>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <DatePicker fx:id="addShowingEndDateDatePicker" promptText="Date (DD-MM-YYY)">
+                  <DatePicker fx:id="endDateDatePicker" promptText="Date (DD-MM-YYY)">
                      <HBox.margin>
                         <Insets left="15.0" right="15.0" top="5.0" />
-                     </HBox.margin></DatePicker>
-                  <TextField fx:id="addShowingEndTimeTextFiels" promptText="Time (HH:MM)">
+                     </HBox.margin>
+                  </DatePicker>
+                  <TextField fx:id="endTimeTextField" promptText="Time (HH:MM)">
                      <HBox.margin>
                         <Insets top="5.0" />
-                     </HBox.margin></TextField>
+                     </HBox.margin>
+                  </TextField>
                </children>
             </HBox>
          </children>
@@ -65,15 +73,17 @@
                </HBox.margin>
                <padding>
                   <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
-               </padding></Button>
+               </padding>
+            </Button>
             <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelButtonClick" text="Cancel">
                <HBox.margin>
                   <Insets top="15.0" />
                </HBox.margin>
                <padding>
                   <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
-               </padding></Button>
-            <Label fx:id="invalitDataMessage" visible="false" text="">
+               </padding>
+            </Button>
+            <Label fx:id="invalidDataMessage" visible="false" text="">
                <HBox.margin>
                   <Insets left="15.0" top="15.0" />
                </HBox.margin>

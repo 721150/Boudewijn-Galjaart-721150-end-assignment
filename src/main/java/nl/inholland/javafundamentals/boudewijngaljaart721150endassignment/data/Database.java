@@ -17,7 +17,7 @@ public class Database {
         this.users.add(new SalesPerson("Wiley", "Finch", "wfinch", "dEb38t3D0c3nt"));
 
         // Voeg de voorstellingen toe aan de "database" van het systeem
-        this.shows.add(new Show(LocalDateTime.of(2024, 10, 4, 16, 30), LocalDateTime.of(2024, 10, 4, 17, 0), "Rebel Moon - Part two: The Scargiver"));
+        this.shows.add(new Show(LocalDateTime.of(2024, 10, 4, 16, 30), LocalDateTime.of(2024, 10, 4, 19, 0), "Rebel Moon - Part two: The Scargiver"));
         this.shows.add(new Show(LocalDateTime.of(2024, 10, 5, 20, 0), LocalDateTime.of(2024, 10, 5, 22, 30), "Captain America: Brave New World"));
 
         // Voeg klanten toe aan de "database" van het systeem

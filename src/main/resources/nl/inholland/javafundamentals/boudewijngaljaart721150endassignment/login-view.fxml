@@ -22,7 +22,12 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <PasswordField fx:id="passwordField" promptText="Password" GridPane.rowIndex="3">
+       <TextField fx:id="usernameField" promptText="Username" GridPane.rowIndex="2">
+           <GridPane.margin>
+               <Insets left="50.0" right="150.0" />
+           </GridPane.margin>
+       </TextField>
+       <PasswordField fx:id="passwordField" promptText="Password" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="50.0" right="150.0" />
          </GridPane.margin>
@@ -37,11 +42,6 @@
             <Insets left="50.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="usernameField" promptText="Username" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets left="50.0" right="150.0" />
-         </GridPane.margin>
-      </TextField>
       <Label fx:id="invalidUserMessage" text="Invalid username/password combination" visible="false" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="50.0" />
