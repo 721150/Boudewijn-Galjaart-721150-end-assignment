@@ -1,5 +1,5 @@
-/* De achtergrond- en tekstkleur van de loginknop instellen */
-#loginButton {
+/* De achtergrond- en tekstkleur van de loginknop, toevoegen knop en tonen knop instellen */
+#loginButton, #addShowingButton, #selectSeatsButton {
     -fx-background-color: #1E90FF;
     -fx-text-fill: #FFFFFF;
 }
@@ -43,7 +43,7 @@
 }
 
 /* De tekstkleur en grootte van de welkomsttekst en schermtekst instellen*/
-#welcomeMassageWhiteName, #manageShowingsTitleLabel, #addShowingTitleLabel {
+#welcomeMassageWhiteName, #manageShowingsTitleLabel, #addShowingTitleLabel, #sellTicketsTitleLabel {
     -fx-text-fill :#737474;
     -fx-font-size: 24.0;
 }
@@ -57,11 +57,6 @@
 #roomNumberLabel {
     -fx-background-color: #000000;
     -fx-text-fill: #FFFFFF;
-}
-
-/* De achtergrondkleur van de toevoegen knop instellen */
-#addShowingButton {
-    -fx-background-color: #1E90FF;
 }
 
 /* De achtergrondkleur van de bewerken knop instellen */

@@ -67,7 +67,8 @@ public class ManageShowingsController implements Initializable {
         // Verwijder een voorstellign uit de VBox en verzameling (alleen indien geen kaarten zijn verkocht)
         Show show = (Show)showingsTableInformationTebleView.getSelectionModel().getSelectedItem();
         if (show.getNumberOfSeatsLeft() == show.getTotalNumberOfSeats()) {
-            shows.remove(show);
+            this.database.deleteShow(show);
+            this.shows.remove(show);
         }
         else {
             // Toon het bericht dat een voorstelling niet kan worden verwijderd

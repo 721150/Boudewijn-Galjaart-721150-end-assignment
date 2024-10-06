@@ -2,7 +2,10 @@ package nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data;
 
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +22,7 @@ public class Database {
         // Voeg de voorstellingen toe aan de "database" van het systeem
         this.shows.add(new Show(LocalDateTime.of(2024, 10, 4, 16, 30), LocalDateTime.of(2024, 10, 4, 19, 0), "Rebel Moon - Part two: The Scargiver"));
         this.shows.add(new Show(LocalDateTime.of(2024, 10, 5, 20, 0), LocalDateTime.of(2024, 10, 5, 22, 30), "Captain America: Brave New World"));
+        this.shows.add(new Show(LocalDateTime.of(2024, 12, 3, 15, 0), LocalDateTime.of(2024, 12, 3, 17, 30), "Venom: The Last Dance"));
 
         // Voeg klanten toe aan de "database" van het systeem
         this.customers.add(new Customer("Bart", "Sneek"));
@@ -42,6 +46,19 @@ public class Database {
         return this.shows;
     }
 
+    public List<Show> getCurrentShows() {
+        // Geef alle voorstellinge door die nog moeten worden gehouden
+        List<Show> currentShows = new ArrayList<>();
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        for (Show show : this.shows) {
+            if (show.getStartDate().isAfter(LocalDate.now()) || show.getStartDate().isEqual(LocalDate.now()) && LocalTime.parse(show.getStartTime(), timeFormatter).isAfter(LocalTime.now()))
+            {
+                currentShows.add(show);
+            }
+        }
+        return currentShows;
+    }
+
     public void addShow(Show show) {
         // Voeg een voorstelling toe aan de lijst met voorstellingen
         this.shows.add(show);
@@ -55,5 +72,10 @@ public class Database {
                 break;
             }
         }
+    }
+
+    public void deleteShow(Show show) {
+        // Verwijder een voorstelling uit de lijst met voorstellingen
+        this.shows.remove(show);
     }
 }

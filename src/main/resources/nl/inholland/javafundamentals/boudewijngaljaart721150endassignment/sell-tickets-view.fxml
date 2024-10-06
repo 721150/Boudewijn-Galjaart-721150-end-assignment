@@ -1,14 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.SellTicketsController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<VBox fx:id="mainScreenVBox" prefHeight="411.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.SellTicketsController">
+    <stylesheets>
+        <URL value="@css/style.css" />
+    </stylesheets>
+    <stylesheets>
+        <URL value="@css/style.css" />
+    </stylesheets>
+    <children>
+        <Label fx:id="sellTicketsTitleLabel" prefHeight="43.0" prefWidth="271.0" text="Sell tickets">
+            <VBox.margin>
+                <Insets left="15.0" />
+            </VBox.margin>
+            <padding>
+                <Insets bottom="15.0" top="15.0" />
+            </padding></Label>
+        <Label fx:id="roomNumberLabel" prefHeight="17.0" prefWidth="870.0" text="Room 1">
+            <VBox.margin>
+                <Insets left="15.0" right="15.0" />
+            </VBox.margin>
+            <padding>
+                <Insets left="10.0" />
+            </padding>
+        </Label>
+        <TableView fx:id="showingsTableInformationTebleView" layoutX="21.0" layoutY="21.0" prefHeight="315.0" prefWidth="869.0">
+            <columns>
+                <TableColumn prefWidth="141.99999940395355" text="Start">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="startDateTime" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="148.99998474121094" text="End">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="endDateTime" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="427.0000457763672" text="Title">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="title" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="150.33331298828125" text="Seats left">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="numberOfSeatsLeftAndAvalableSeats" />
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+            <VBox.margin>
+                <Insets bottom="15.0" left="15.0" right="15.0" />
+            </VBox.margin>
+        </TableView>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <HBox prefHeight="44.0" prefWidth="869.0">
+               <children>
+                  <Label text="Selected: ">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="15.0" top="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="informationAboutSelectedShowLabel" text="">
+                     <HBox.margin>
+                        <Insets left="5.0" top="15.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <Button fx:id="selectSeatsButton" disable="true" mnemonicParsing="false" text="Selected seat(s)">
+               <VBox.margin>
+                  <Insets left="15.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </VBox.margin>
+      </VBox>
+    </children>
 </VBox>
