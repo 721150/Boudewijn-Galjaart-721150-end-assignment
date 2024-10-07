@@ -72,7 +72,7 @@
                   </Label>
                </children>
             </HBox>
-            <Button fx:id="selectSeatsButton" disable="true" mnemonicParsing="false" text="Selected seat(s)">
+            <Button fx:id="selectSeatsButton" onAction="#selectSeatsButtonAction" disable="true" mnemonicParsing="false" text="Selected seat(s)">
                <VBox.margin>
                   <Insets left="15.0" />
                </VBox.margin>

@@ -1,5 +1,5 @@
 /* De achtergrond- en tekstkleur van de loginknop, toevoegen knop en tonen knop instellen */
-#loginButton, #addShowingButton, #selectSeatsButton {
+#loginButton, #addShowingButton, #selectSeatsButton, #sellSeatsTicketsButton {
     -fx-background-color: #1E90FF;
     -fx-text-fill: #FFFFFF;
 }
@@ -75,7 +75,7 @@
 }
 
 /* De achtergrondkleur van de VBox instellen */
-#addDataVBox, #showInformationVBox {
+#addDataVBox, #showInformationVBox, #viewScreenHBox {
     -fx-background-color: #FFFFFF;
 }
 

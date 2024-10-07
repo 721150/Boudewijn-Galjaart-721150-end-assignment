@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="mainScreenVBox" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.SeatsSellTicketsController">
+<VBox fx:id="mainScreenVBox" prefHeight="411.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.SeatsSellTicketsController">
     <stylesheets>
         <URL value="@css/style.css" />
     </stylesheets>
@@ -18,15 +18,73 @@
             <Insets left="15.0" />
         </VBox.margin>
         <padding>
-            <Insets bottom="15.0" top="15.0" />
+            <Insets bottom="5.0" top="15.0" />
         </padding></Label>
-      <Label text="Label" />
-      <HBox prefHeight="100.0" prefWidth="200.0" />
-      <TextField />
+        <HBox prefHeight="0.0" prefWidth="600.0">
+            <children>
+                <Label text="Selected: ">
+                    <HBox.margin>
+                        <Insets left="15.0" />
+                    </HBox.margin>
+                </Label>
+                <Label fx:id="informationAboutSelectedShowLabel" text="">
+                    <HBox.margin>
+                        <Insets left="5.0" />
+                    </HBox.margin>
+                </Label>
+            </children>
+        </HBox>
+      <HBox fx:id="viewScreenHBox" prefHeight="237.0" prefWidth="569.0">
+         <children>
+            <GridPane fx:id="allSeatsGridPane" prefHeight="187.0" prefWidth="512.0">
+               <HBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </HBox.margin>
+            </GridPane>
+            <VBox prefHeight="202.0" prefWidth="157.0">
+               <children>
+                  <Label text="Selected seats:" />
+                  <TextArea fx:id="selectedSeatsTextArea" prefHeight="169.0" prefWidth="151.0">
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </TextArea>
+               </children>
+               <HBox.margin>
+                  <Insets top="15.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+         <VBox.margin>
+            <Insets left="15.0" right="15.0" />
+         </VBox.margin></HBox>
+      <HBox prefHeight="45.0" prefWidth="869.0">
+         <VBox.margin>
+            <Insets left="15.0" right="15.0" top="15.0" />
+         </VBox.margin>
+         <children>
+            <TextField fx:id="firstnameCustomerTextField" prefHeight="25.0" prefWidth="250.0" promptText="Customer firstname">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+            </TextField>
+            <TextField fx:id="lastnameCustomerTextFiels" prefHeight="25.0" prefWidth="250.0" promptText="Customer lastname">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
+            <Button fx:id="sellSeatsTicketsButton" disable="true" mnemonicParsing="false" text="Sell tickets">
+               <HBox.margin>
+                  <Insets left="30.0" right="15.0" top="15.0" />
+               </HBox.margin></Button>
+            <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel">
+               <HBox.margin>
+                  <Insets top="15.0" />
+               </HBox.margin></Button>
          </children>
       </HBox>
     </children>

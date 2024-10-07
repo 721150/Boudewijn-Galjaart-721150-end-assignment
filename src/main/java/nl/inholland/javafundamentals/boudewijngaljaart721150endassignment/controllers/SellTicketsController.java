@@ -4,14 +4,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
+import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartApplication;
+import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.enums.Screen;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Show;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.User;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,6 +29,9 @@ public class SellTicketsController implements Initializable {
 
     @FXML
     private Label informationAboutSelectedShowLabel;
+
+    @FXML
+    private VBox mainScreenVBox;
 
     private User user;
 
@@ -46,11 +54,25 @@ public class SellTicketsController implements Initializable {
         showingsTableInformationTebleView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 selectSeatsButton.setDisable(false);
-                Show show = (Show)showingsTableInformationTebleView.getSelectionModel().getSelectedItem();
-                informationAboutSelectedShowLabel.setText(show.getStartDateTime() + " " + show.getTitle());
+                informationAboutSelectedShowLabel.setText(getSelectedShow().getStartDateTime() + " " + getSelectedShow().getTitle());
             } else {
                 selectSeatsButton.setDisable(true);
             }
         });
+    }
+
+    @FXML
+    protected void selectSeatsButtonAction(ActionEvent event) throws IOException {
+        // Toon het scherm in de VBox
+        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("seats-sell-tickets-view.fxml"));
+        VBox vBox = fxmlLoader.load();
+        mainScreenVBox.getChildren().setAll(vBox);
+        SeatsSellTicketsController seatsSellTicketsController = fxmlLoader.getController();
+        seatsSellTicketsController.giveData(this.user, this.database, getSelectedShow());
+    }
+
+    private Show getSelectedShow() {
+        // Haal de geselecteerde voorstelling op uit de tabel
+        return (Show)showingsTableInformationTebleView.getSelectionModel().getSelectedItem();
     }
 }

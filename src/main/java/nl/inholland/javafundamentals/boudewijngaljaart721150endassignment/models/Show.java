@@ -15,7 +15,7 @@ public class Show {
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.title = title;
-        this.seats = new Customer[12][6];
+        this.seats = new Customer[6][12];
     }
 
     public Show(LocalDateTime startDateTime, LocalDateTime endDateTime, String title, Customer[][] seats) {

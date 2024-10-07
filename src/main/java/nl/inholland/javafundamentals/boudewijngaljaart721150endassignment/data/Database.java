@@ -39,17 +39,17 @@ public class Database {
         this.customers.add(new Customer("Charlie", "Brown"));
 
         // Voeg klanten toe aan de voorstellingen
-        this.shows.get(0).addCustomer(customers.get(0), 1, 5);
-        this.shows.get(0).addCustomer(customers.get(1), 2, 5);
-        this.shows.get(0).addCustomer(customers.get(2), 3, 5);
-        this.shows.get(1).addCustomer(customers.get(1), 4, 5);
+        this.shows.get(0).addCustomer(customers.get(0), 5, 1);
+        this.shows.get(0).addCustomer(customers.get(1), 5, 2);
+        this.shows.get(0).addCustomer(customers.get(2), 5, 3);
+        this.shows.get(1).addCustomer(customers.get(1), 5, 4);
         this.shows.get(1).addCustomer(customers.get(3), 5, 5);
-        this.shows.get(2).addCustomer(customers.get(4), 6, 5);
-        this.shows.get(3).addCustomer(customers.get(0), 7, 5);
-        this.shows.get(4).addCustomer(customers.get(2), 8, 5);
-        this.shows.get(5).addCustomer(customers.get(3), 9, 5);
-        this.shows.get(6).addCustomer(customers.get(4), 10, 5);
-        this.shows.get(7).addCustomer(customers.get(1), 11, 5);
+        this.shows.get(2).addCustomer(customers.get(4), 5, 6);
+        this.shows.get(3).addCustomer(customers.get(0), 5, 7);
+        this.shows.get(4).addCustomer(customers.get(2), 5, 8);
+        this.shows.get(5).addCustomer(customers.get(3), 5, 9);
+        this.shows.get(6).addCustomer(customers.get(4), 5, 10);
+        this.shows.get(7).addCustomer(customers.get(1), 5, 11);
     }
 
     public List<User> getUsers() {

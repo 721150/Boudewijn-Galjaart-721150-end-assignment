@@ -1,6 +1,7 @@
 module nl.inholland.javafundamentals.boudewijngaljaart721150endassignment {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.xml;
 
 
     opens nl.inholland.javafundamentals.boudewijngaljaart721150endassignment to javafx.fxml;
