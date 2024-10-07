@@ -2,9 +2,11 @@ package nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.contr
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Show;
@@ -19,6 +21,9 @@ public class SellTicketsController implements Initializable {
 
     @FXML
     private Button selectSeatsButton;
+
+    @FXML
+    private Label informationAboutSelectedShowLabel;
 
     private User user;
 
@@ -37,10 +42,12 @@ public class SellTicketsController implements Initializable {
         // Toon de voorstellingen in de tabel
         showingsTableInformationTebleView.setItems(this.shows);
 
-        // Zorg ervoor dat de knoppen weizigen en verwijderen alleen werken als er een item is geselecteerd
+        // Zorg ervoor dat de knoppen weizigen en verwijderen alleen werken als er een item is geselecteerd en dat de informatie van een geselecteerde voorstelling wordt weergeven
         showingsTableInformationTebleView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 selectSeatsButton.setDisable(false);
+                Show show = (Show)showingsTableInformationTebleView.getSelectionModel().getSelectedItem();
+                informationAboutSelectedShowLabel.setText(show.getStartDateTime() + " " + show.getTitle());
             } else {
                 selectSeatsButton.setDisable(true);
             }

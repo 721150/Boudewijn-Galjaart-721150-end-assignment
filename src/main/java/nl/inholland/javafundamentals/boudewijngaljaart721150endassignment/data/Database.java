@@ -18,22 +18,38 @@ public class Database {
         // Voeg de gebruikers toe aan de "database" van het systeem
         this.users.add(new Manager("Mark", "de Haan", "mdhaan", "dEb38t3D0c3nt"));
         this.users.add(new SalesPerson("Wiley", "Finch", "wfinch", "dEb38t3D0c3nt"));
+        this.users.add(new Manager("Anna", "Bakker", "abakker", "pAssw0rd"));
+        this.users.add(new SalesPerson("John", "Doe", "jdoe", "pAssw0rd"));
 
         // Voeg de voorstellingen toe aan de "database" van het systeem
         this.shows.add(new Show(LocalDateTime.of(2024, 10, 4, 16, 30), LocalDateTime.of(2024, 10, 4, 19, 0), "Rebel Moon - Part two: The Scargiver"));
         this.shows.add(new Show(LocalDateTime.of(2024, 10, 5, 20, 0), LocalDateTime.of(2024, 10, 5, 22, 30), "Captain America: Brave New World"));
         this.shows.add(new Show(LocalDateTime.of(2024, 12, 3, 15, 0), LocalDateTime.of(2024, 12, 3, 17, 30), "Venom: The Last Dance"));
+        this.shows.add(new Show(LocalDateTime.of(2024, 11, 1, 18, 0), LocalDateTime.of(2024, 11, 1, 20, 30), "Dune: Part Two"));
+        this.shows.add(new Show(LocalDateTime.of(2024, 11, 10, 14, 0), LocalDateTime.of(2024, 11, 10, 16, 30), "Avatar: The Way of Water"));
+        this.shows.add(new Show(LocalDateTime.of(2024, 11, 15, 19, 0), LocalDateTime.of(2024, 11, 15, 21, 30), "The Batman"));
+        this.shows.add(new Show(LocalDateTime.of(2024, 12, 1, 17, 0), LocalDateTime.of(2024, 12, 1, 19, 30), "Spider-Man: No Way Home"));
+        this.shows.add(new Show(LocalDateTime.of(2024, 12, 10, 20, 0), LocalDateTime.of(2024, 12, 10, 22, 30), "The Matrix Resurrections"));
 
         // Voeg klanten toe aan de "database" van het systeem
         this.customers.add(new Customer("Bart", "Sneek"));
         this.customers.add(new Customer("Bob", "Meskers"));
         this.customers.add(new Customer("David", "Davidson"));
+        this.customers.add(new Customer("Alice", "Wonderland"));
+        this.customers.add(new Customer("Charlie", "Brown"));
 
         // Voeg klanten toe aan de voorstellingen
         this.shows.get(0).addCustomer(customers.get(0), 1, 5);
         this.shows.get(0).addCustomer(customers.get(1), 2, 5);
         this.shows.get(0).addCustomer(customers.get(2), 3, 5);
         this.shows.get(1).addCustomer(customers.get(1), 4, 5);
+        this.shows.get(1).addCustomer(customers.get(3), 5, 5);
+        this.shows.get(2).addCustomer(customers.get(4), 6, 5);
+        this.shows.get(3).addCustomer(customers.get(0), 7, 5);
+        this.shows.get(4).addCustomer(customers.get(2), 8, 5);
+        this.shows.get(5).addCustomer(customers.get(3), 9, 5);
+        this.shows.get(6).addCustomer(customers.get(4), 10, 5);
+        this.shows.get(7).addCustomer(customers.get(1), 11, 5);
     }
 
     public List<User> getUsers() {

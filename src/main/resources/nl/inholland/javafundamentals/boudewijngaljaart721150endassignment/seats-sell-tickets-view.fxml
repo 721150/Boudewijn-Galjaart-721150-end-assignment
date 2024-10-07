@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="mainScreenVBox" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.SeatsSellTicketsController">
+    <stylesheets>
+        <URL value="@css/style.css" />
+    </stylesheets>
+    <stylesheets>
+        <URL value="@css/style.css" />
+    </stylesheets>
+    <children>
+    <Label fx:id="sellTicketsTitleLabel" prefHeight="43.0" prefWidth="271.0" text="Sell tickets">
+        <VBox.margin>
+            <Insets left="15.0" />
+        </VBox.margin>
+        <padding>
+            <Insets bottom="15.0" top="15.0" />
+        </padding></Label>
+      <Label text="Label" />
+      <HBox prefHeight="100.0" prefWidth="200.0" />
+      <TextField />
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" text="Button" />
+            <Button mnemonicParsing="false" text="Button" />
+         </children>
+      </HBox>
+    </children>
+</VBox>

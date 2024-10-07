@@ -75,6 +75,11 @@
 }
 
 /* De achtergrondkleur van de VBox instellen */
-#addDataVBox {
+#addDataVBox, #showInformationVBox {
     -fx-background-color: #FFFFFF;
+}
+
+/* De tekst ved instellen */
+#informationAboutSelectedShowLabel {
+    -fx-font-weight: bold;
 }
