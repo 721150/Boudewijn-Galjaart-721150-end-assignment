@@ -94,4 +94,9 @@ public class Database {
         // Verwijder een voorstelling uit de lijst met voorstellingen
         this.shows.remove(show);
     }
+
+    public void addCustomer(Customer customer) {
+        // Voe een klant toe aan de tijdelijke "database"
+        this.customers.add(customer);
+    }
 }

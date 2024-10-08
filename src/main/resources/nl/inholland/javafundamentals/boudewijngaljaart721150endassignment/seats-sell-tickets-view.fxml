@@ -68,7 +68,7 @@
                   <Insets left="15.0" />
                </HBox.margin>
             </TextField>
-            <TextField fx:id="lastnameCustomerTextFiels" prefHeight="25.0" prefWidth="250.0" promptText="Customer lastname">
+            <TextField fx:id="lastnameCustomerTextField" prefHeight="25.0" prefWidth="250.0" promptText="Customer lastname">
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin>
@@ -77,14 +77,19 @@
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button fx:id="sellSeatsTicketsButton" disable="true" mnemonicParsing="false" text="Sell tickets">
+            <Button fx:id="sellSeatsTicketsButton" onAction="#sellButtonClick" disable="true" mnemonicParsing="false" text="Sell tickets">
                <HBox.margin>
                   <Insets left="30.0" right="15.0" top="15.0" />
                </HBox.margin></Button>
-            <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel">
+            <Button fx:id="cancelButton" onAction="#cancelButtonClick" mnemonicParsing="false" text="Cancel">
                <HBox.margin>
                   <Insets top="15.0" />
                </HBox.margin></Button>
+            <Label fx:id="sellFailMessage" visible="false" text="Cannot select a seat that is already occupied. Please select a seat that is not displayed in red.">
+               <HBox.margin>
+                  <Insets left="15.0" top="15.0" />
+               </HBox.margin>
+            </Label>
          </children>
       </HBox>
     </children>
