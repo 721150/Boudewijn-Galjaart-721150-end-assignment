@@ -84,6 +84,19 @@ public class Show {
         return numberOfSeatsLeft;
     }
 
+    public int getNumberOfSeatsSolt() {
+        // Bereken het aantal vrije stoelen en geef dit terug
+        int numberOfSeatsLeft = 0;
+        for (Customer[] row : seats) {
+            for (Customer seat : row) {
+                if (seat != null) {
+                    numberOfSeatsLeft += 1;
+                }
+            }
+        }
+        return numberOfSeatsLeft;
+    }
+
     public void setStartDateTime(LocalDateTime startDateTime) {
         this.startDateTime = startDateTime;
     }

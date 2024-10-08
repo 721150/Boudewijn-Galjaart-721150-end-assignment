@@ -43,7 +43,7 @@
 }
 
 /* De tekstkleur en grootte van de welkomsttekst en schermtekst instellen*/
-#welcomeMassageWhiteName, #manageShowingsTitleLabel, #addShowingTitleLabel, #sellTicketsTitleLabel {
+#welcomeMassageWhiteName, #manageShowingsTitleLabel, #addShowingTitleLabel, #sellTicketsTitleLabel, #viewSalesHistoryTitleLabel {
     -fx-text-fill :#737474;
     -fx-font-size: 24.0;
 }

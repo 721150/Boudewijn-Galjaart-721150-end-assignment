@@ -1,14 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.ViewSalesHistoryController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<VBox fx:id="mainScreenVBox" prefHeight="411.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.ViewSalesHistoryController">
+    <stylesheets>
+        <URL value="@css/style.css" />
+    </stylesheets>
+    <children>
+        <Label fx:id="viewSalesHistoryTitleLabel" prefHeight="43.0" prefWidth="271.0" text="View sales history">
+            <VBox.margin>
+                <Insets left="15.0" />
+            </VBox.margin>
+            <padding>
+                <Insets bottom="15.0" top="15.0" />
+            </padding></Label>
+        <Label fx:id="roomNumberLabel" prefHeight="17.0" prefWidth="870.0" text="Room 1">
+            <VBox.margin>
+                <Insets left="15.0" right="15.0" />
+            </VBox.margin>
+            <padding>
+                <Insets left="10.0" />
+            </padding>
+        </Label>
+        <TableView fx:id="showingsTableInformationTebleView" layoutX="21.0" layoutY="21.0" prefHeight="278.0" prefWidth="569.0">
+            <columns>
+                <TableColumn prefWidth="141.99999940395355" text="Date/time">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="startDateTime" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="148.99998474121094" text="Number of tickets">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="numberOfSeatsSolt" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="169.33334350585938" text="Customer">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="seats[0]" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="408.66668701171875" text="Showing">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="title" />
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+            <VBox.margin>
+                <Insets bottom="15.0" left="15.0" right="15.0" />
+            </VBox.margin>
+        </TableView>
+    </children>
 </VBox>
