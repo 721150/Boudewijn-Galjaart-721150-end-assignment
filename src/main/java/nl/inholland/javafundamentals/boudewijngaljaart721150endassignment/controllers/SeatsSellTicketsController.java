@@ -71,58 +71,69 @@ public class SeatsSellTicketsController implements Initializable {
         loadSeatsInGridPane();
     }
 
-    private void loadSeatsInGridPane() {
-        // Maak de GridPane met daarin alle zitplaatsen voor de voorstelling
+    private void setupGridPane() {
         allSeatsGridPane.setHgap(5);
         allSeatsGridPane.setVgap(5);
+    }
+
+    private void addRowsAndSeats() {
         for (int row = 0; row < this.show.getSeats().length; row++) {
-            Text rowLabel = new Text("Row " + (row + 1));
-            allSeatsGridPane.add(rowLabel, 0, row);
+            addRowLabel(row);
             for (int col = 0; col < this.show.getSeats()[row].length; col++) {
-                Rectangle seat  = new Rectangle(30,30);
-
-                Text text = new Text(String.valueOf((col + 1)));
-                text.setFill(Color.WHITE);
-
-                StackPane stackPane = new StackPane();
-                stackPane.getChildren().addAll(seat, text);
-
-                if (this.show.getSeats()[row][col] != null){
-                    seat.setFill(Color.RED);
-                }
-                else {
-                    seat.setFill(Color.GRAY);
-                }
-
-
-                final int currentRow = row + 1;
-                final int currentCol = col + 1;
-                stackPane.setOnMouseClicked(event -> {
-                    Color currentColor = (Color)seat.getFill();
-                    if (currentColor == Color.RED) {
-                        sellFailMessage.setVisible(true);
-                    }
-                    else if (currentColor == Color.GREEN) {
-                        seat.setFill(Color.GRAY);
-                        selectedSeatsTextArea.setText(selectedSeatsTextArea.getText().replace("Row " + currentRow + "/Seat " + currentCol + "\n", ""));
-                        sellFailMessage.setVisible(false);
-                        this.selectedSeatsCount--;
-                    }
-                    else {
-                        seat.setFill(Color.GREEN);
-                        selectedSeatsTextArea.appendText("Row " + currentRow + "/Seat " + currentCol + "\n");
-                        sellFailMessage.setVisible(false);
-                        this.selectedSeatsCount++;
-                    }
-                    updateSellButtonLabel();
-                });
-
-                allSeatsGridPane.add(stackPane, col + 1, row);
+                addSeat(row, col);
             }
         }
-
-
     }
+
+    private void addRowLabel(int row) {
+        Text rowLabel = new Text("Row " + (row + 1));
+        allSeatsGridPane.add(rowLabel, 0, row);
+    }
+
+    private void addSeat(int row, int col) {
+        Rectangle seat = new Rectangle(30, 30);
+        Text text = new Text(String.valueOf((col + 1)));
+        text.setFill(Color.WHITE);
+
+        StackPane stackPane = new StackPane();
+        stackPane.getChildren().addAll(seat, text);
+
+        if (this.show.getSeats()[row][col] != null) {
+            seat.setFill(Color.RED);
+        } else {
+            seat.setFill(Color.GRAY);
+        }
+
+        final int currentRow = row + 1;
+        final int currentCol = col + 1;
+        stackPane.setOnMouseClicked(event -> handleSeatClick(seat, currentRow, currentCol));
+
+        allSeatsGridPane.add(stackPane, col + 1, row);
+    }
+
+    private void handleSeatClick(Rectangle seat, int currentRow, int currentCol) {
+        Color currentColor = (Color) seat.getFill();
+        if (currentColor == Color.RED) {
+            sellFailMessage.setVisible(true);
+        } else if (currentColor == Color.GREEN) {
+            seat.setFill(Color.GRAY);
+            selectedSeatsTextArea.setText(selectedSeatsTextArea.getText().replace("Row " + currentRow + "/Seat " + currentCol + "\n", ""));
+            sellFailMessage.setVisible(false);
+            this.selectedSeatsCount--;
+        } else {
+            seat.setFill(Color.GREEN);
+            selectedSeatsTextArea.appendText("Row " + currentRow + "/Seat " + currentCol + "\n");
+            sellFailMessage.setVisible(false);
+            this.selectedSeatsCount++;
+        }
+        updateSellButtonLabel();
+    }
+
+    private void loadSeatsInGridPane() {
+        setupGridPane();
+        addRowsAndSeats();
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
