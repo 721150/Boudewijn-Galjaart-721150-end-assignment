@@ -40,7 +40,7 @@
                 </TableColumn>
                 <TableColumn prefWidth="169.33334350585938" text="Customer">
                     <cellValueFactory>
-                        <PropertyValueFactory property="seats[0]" />
+                        <PropertyValueFactory property="seats" />
                     </cellValueFactory>
                 </TableColumn>
                 <TableColumn prefWidth="408.66668701171875" text="Showing">
