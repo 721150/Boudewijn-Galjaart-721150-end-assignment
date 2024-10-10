@@ -18,8 +18,8 @@ public class Database {
         // Voeg de gebruikers toe aan de "database" van het systeem
         this.users.add(new Manager("Mark", "de Haan", "mdhaan", "dEb38t3D0c3nt"));
         this.users.add(new SalesPerson("Wiley", "Finch", "wfinch", "dEb38t3D0c3nt"));
-        this.users.add(new Manager("Anna", "Bakker", "abakker", "pAssw0rd"));
-        this.users.add(new SalesPerson("John", "Doe", "jdoe", "pAssw0rd"));
+        this.users.add(new Manager("Anna", "Bakker", "abakker", "%7agIIAd8"));
+        this.users.add(new SalesPerson("John", "Doe", "jdoe", "%7agIIAd8"));
 
         // Voeg de voorstellingen toe aan de "database" van het systeem
         this.shows.add(new Show(LocalDateTime.of(2024, 10, 4, 16, 30), LocalDateTime.of(2024, 10, 4, 19, 0), "Rebel Moon - Part two: The Scargiver"));

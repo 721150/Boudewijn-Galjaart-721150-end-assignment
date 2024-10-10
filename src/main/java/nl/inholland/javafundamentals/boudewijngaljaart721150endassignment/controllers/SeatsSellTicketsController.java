@@ -25,7 +25,6 @@ import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -72,11 +71,13 @@ public class SeatsSellTicketsController implements Initializable {
     }
 
     private void setupGridPane() {
+        // Zorg dat er ruimte is tussen de verschillende zitplaatsen in het scherm
         allSeatsGridPane.setHgap(5);
         allSeatsGridPane.setVgap(5);
     }
 
     private void addRowsAndSeats() {
+        // Laat alle zitplaatsen op het scherm zien
         for (int row = 0; row < this.show.getSeats().length; row++) {
             addRowLabel(row);
             for (int col = 0; col < this.show.getSeats()[row].length; col++) {
@@ -86,32 +87,29 @@ public class SeatsSellTicketsController implements Initializable {
     }
 
     private void addRowLabel(int row) {
+        // Voeg een nieuwe rij toe aan het scherm met zitplaatsen
         Text rowLabel = new Text("Row " + (row + 1));
         allSeatsGridPane.add(rowLabel, 0, row);
     }
 
     private void addSeat(int row, int col) {
+        // Voeg een nieuwe stoel toe aan een rij op het scherm
         Rectangle seat = new Rectangle(30, 30);
         Text text = new Text(String.valueOf((col + 1)));
         text.setFill(Color.WHITE);
-
         StackPane stackPane = new StackPane();
         stackPane.getChildren().addAll(seat, text);
-
         if (this.show.getSeats()[row][col] != null) {
             seat.setFill(Color.RED);
         } else {
             seat.setFill(Color.GRAY);
         }
-
-        final int currentRow = row + 1;
-        final int currentCol = col + 1;
-        stackPane.setOnMouseClicked(event -> handleSeatClick(seat, currentRow, currentCol));
-
+        stackPane.setOnMouseClicked(event -> handleSeatClick(seat, row + 1, col + 1));
         allSeatsGridPane.add(stackPane, col + 1, row);
     }
 
     private void handleSeatClick(Rectangle seat, int currentRow, int currentCol) {
+        // Zet de kleur van de zitplek naar de status en voeg deze toe of verwijder deze van de lijst met geslecteerde plaatsen
         Color currentColor = (Color) seat.getFill();
         if (currentColor == Color.RED) {
             sellFailMessage.setVisible(true);
@@ -149,6 +147,7 @@ public class SeatsSellTicketsController implements Initializable {
     }
 
     private void updateSellButtonLabel() {
+        // Pas de tekst van de knop bestellen aan naar het aantal geselecteerde kaartjes
         if (this.selectedSeatsCount == 0) {
             sellSeatsTicketsButton.setText("Sell tickets");
             return;
@@ -158,18 +157,17 @@ public class SeatsSellTicketsController implements Initializable {
 
     @FXML
     protected void sellButtonClick(ActionEvent event) throws IOException {
+        // Voeg de opgegeven klant toe aan de "database"
         Customer customer = new Customer(firstnameCustomerTextField.getText(), lastnameCustomerTextField.getText());
-
         this.database.addCustomer(customer);
 
+        // Haal de geselecteerde positie op en voeg deze toe aan de "database"
         List<int[]> selectedSeatsPositions = getSelectedSeatsPositions();
         Show show = this.show;
-
         for (int[] position : selectedSeatsPositions) {
             show.addCustomer(customer, position[0] - 1, position[1] - 1);
             this.database.editShow(this.show, show);
         }
-
         openManageShowingsScreen();
     }
 
