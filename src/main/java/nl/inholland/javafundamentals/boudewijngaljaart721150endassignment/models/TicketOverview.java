@@ -1,7 +1,5 @@
 package nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models;
 
-import java.time.LocalDateTime;
-
 public class TicketOverview {
     private String customerName;
     private String showTitle;

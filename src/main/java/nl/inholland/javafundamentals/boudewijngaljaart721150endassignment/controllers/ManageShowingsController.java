@@ -1,6 +1,5 @@
 package nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers;
 
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

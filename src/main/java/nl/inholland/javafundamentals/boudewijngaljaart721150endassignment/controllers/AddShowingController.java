@@ -20,6 +20,7 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ResourceBundle;
 
 public class AddShowingController implements Initializable {
@@ -89,26 +90,27 @@ public class AddShowingController implements Initializable {
 
     private void handleAddOrEdit() throws IOException {
         String title = titleTextField.getText();
-        LocalDateTime startDateTime; LocalDateTime endDateTime; LocalTime startTime; LocalTime endTime;
+        LocalDateTime startDateTime; LocalDateTime endDateTime;
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        if (checkValitInput(title)) return;
-
-        // Zet de data van het tijdveld om naar een LocalTime en controleer of dit in het goede format is
-        try {
-            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-            startTime = LocalTime.parse(startTimeTextField.getText(), timeFormatter);
-            endTime = LocalTime.parse(endTimeTextField.getText(), timeFormatter);
-        } catch (Exception exception) {
-            displayErrorMessage("Incorrect format time, use HH:MM. Such as 13:15.");
+        if (checkValitInput(title)) {
             return;
         }
 
         // Zet de data van het datumveld en tijdveld om naar een LocalDateTime en controleer of dit in het goede format is
         try {
-            startDateTime = LocalDateTime.of(startDateDatePicker.getValue(), startTime);
-            endDateTime = LocalDateTime.of(endDateDatePicker.getValue(), endTime);
-        } catch (Exception exception) {
-            displayErrorMessage("Incorrect format date, use DD-MM-YYYY. Such as 12-04-2024.");
+            startDateTime = LocalDateTime.of(startDateDatePicker.getValue(), LocalTime.parse(startTimeTextField.getText(), timeFormatter));
+            endDateTime = LocalDateTime.of(endDateDatePicker.getValue(), LocalTime.parse(endTimeTextField.getText(), timeFormatter));
+        } catch (DateTimeParseException e) {
+            return;
+        }
+
+        if (timeAndDateOfPast(startDateTime) || timeAndDateOfPast(endDateTime)) {
+            return;
+        }
+
+        if (endDateTime.isBefore(startDateTime)) {
+            displayErrorMessage("End date and time cannot be before start date and time");
             return;
         }
 
@@ -176,14 +178,63 @@ public class AddShowingController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Stel het veld van de eindtijd automatisch in op de geschatte eindtijd bij nieuwe voorstellingen
-        startTimeTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue && startDateDatePicker.getValue() != null && this.mode.equals(Screen.ADD)) {
-                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-                LocalTime startTime = LocalTime.parse(startTimeTextField.getText(), timeFormatter);
-                LocalTime endTime = startTime.plusMinutes(DURATION_SHOW);
-                endTimeTextField.setText(endTime.format(timeFormatter));
+        // Voeg een foutafhandeling toe voor wanneer een foute datum wordt ingevoerd
+        startDateDatePicker.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
+            validDateDatePicker(startDateDatePicker);
+        });
+        endDateDatePicker.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
+            validDateDatePicker(endDateDatePicker);
+        });
+
+        // Voeg een foutafhandeling toe voor wanneer een foute tijd wordt ingevoerd
+        startTimeTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            validTimeTextField(startTimeTextField);
+            if (startTimeTextField.getText() != null && this.mode.equals(Screen.ADD)) {
+                try {
+                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+                    LocalTime startTime = LocalTime.parse(startTimeTextField.getText(), timeFormatter);
+                    LocalTime endTime = startTime.plusMinutes(DURATION_SHOW);
+                    endTimeTextField.setText(endTime.format(timeFormatter));
+                } catch (DateTimeParseException e) {}
             }
         });
+        endTimeTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            validTimeTextField(endTimeTextField);
+        });
+    }
+
+    private void validDateDatePicker(DatePicker datePicker) {
+        // Geef een melding weer op het moment dat een verkeert format van de datum is ingevoerd
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            formatter.parse(datePicker.getEditor().getText());
+            invalidDataMessage.setVisible(false);
+            datePicker.setStyle("");
+        } catch (DateTimeParseException e) {
+            displayErrorMessage("Incorrect format date, use DD-MM-YYYY. Such as 12-04-2024.");
+            datePicker.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+        }
+    }
+
+    private void validTimeTextField(TextField textField) {
+        // Geeft een melding weer op het moment dat een verkeert format van de datum is ingevoerd
+        try {
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+            LocalTime.parse(textField.getText(), timeFormatter);
+            invalidDataMessage.setVisible(false);
+            textField.setStyle("");
+        } catch (Exception exception) {
+            displayErrorMessage("Incorrect format time, use HH:MM. Such as 13:15.");
+            textField.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+        }
+    }
+
+    private boolean timeAndDateOfPast(LocalDateTime dateTime) {
+        // Geef een foutmelding wanneer de datum/tijd in het verleden licht
+        if (dateTime.isBefore(LocalDateTime.now())) {
+            displayErrorMessage("Cannot set a date and time from the past");
+            return true;
+        }
+        return false;
     }
 }

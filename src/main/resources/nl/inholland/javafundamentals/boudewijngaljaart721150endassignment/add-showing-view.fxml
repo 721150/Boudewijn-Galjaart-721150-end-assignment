@@ -83,7 +83,7 @@
                   <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
                </padding>
             </Button>
-            <Label fx:id="invalidDataMessage" visible="false" text="">
+            <Label fx:id="invalidDataMessage" text="" visible="false">
                <HBox.margin>
                   <Insets left="15.0" top="15.0" />
                </HBox.margin>
