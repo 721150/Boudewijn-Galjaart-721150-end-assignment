@@ -30,22 +30,22 @@
             <columns>
                 <TableColumn prefWidth="141.99999940395355" text="Date/time">
                     <cellValueFactory>
-                        <PropertyValueFactory property="startDateTime" />
+                        <PropertyValueFactory property="purchaseDateTime" />
                     </cellValueFactory>
                 </TableColumn>
                 <TableColumn prefWidth="148.99998474121094" text="Number of tickets">
                     <cellValueFactory>
-                        <PropertyValueFactory property="numberOfSeatsSolt" />
+                        <PropertyValueFactory property="ticketsSold" />
                     </cellValueFactory>
                 </TableColumn>
                 <TableColumn prefWidth="169.33334350585938" text="Customer">
                     <cellValueFactory>
-                        <PropertyValueFactory property="seats" />
+                        <PropertyValueFactory property="customerName" />
                     </cellValueFactory>
                 </TableColumn>
                 <TableColumn prefWidth="408.66668701171875" text="Showing">
                     <cellValueFactory>
-                        <PropertyValueFactory property="title" />
+                        <PropertyValueFactory property="showTitle" />
                     </cellValueFactory>
                 </TableColumn>
             </columns>

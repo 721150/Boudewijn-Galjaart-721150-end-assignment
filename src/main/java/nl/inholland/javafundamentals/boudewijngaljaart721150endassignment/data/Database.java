@@ -2,6 +2,7 @@ package nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data;
 
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.*;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -9,10 +10,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Database {
+public class Database implements Serializable {
     private List<User> users = new ArrayList<>();
     private List<Show> shows = new ArrayList<>();
-    private List<Customer> customers = new ArrayList<>();
 
     public Database() {
         // Voeg de gebruikers toe aan de "database" van het systeem
@@ -31,25 +31,18 @@ public class Database {
         this.shows.add(new Show(LocalDateTime.of(2024, 12, 1, 17, 0), LocalDateTime.of(2024, 12, 1, 19, 30), "Spider-Man: No Way Home"));
         this.shows.add(new Show(LocalDateTime.of(2024, 12, 10, 20, 0), LocalDateTime.of(2024, 12, 10, 22, 30), "The Matrix Resurrections"));
 
-        // Voeg klanten toe aan de "database" van het systeem
-        this.customers.add(new Customer("Bart", "Sneek"));
-        this.customers.add(new Customer("Bob", "Meskers"));
-        this.customers.add(new Customer("David", "Davidson"));
-        this.customers.add(new Customer("Alice", "Wonderland"));
-        this.customers.add(new Customer("Charlie", "Brown"));
-
         // Voeg klanten toe aan de voorstellingen
-        this.shows.get(0).addCustomer(customers.get(0), 5, 1);
-        this.shows.get(0).addCustomer(customers.get(1), 5, 2);
-        this.shows.get(0).addCustomer(customers.get(2), 5, 3);
-        this.shows.get(1).addCustomer(customers.get(1), 5, 4);
-        this.shows.get(1).addCustomer(customers.get(3), 5, 5);
-        this.shows.get(2).addCustomer(customers.get(4), 5, 6);
-        this.shows.get(3).addCustomer(customers.get(0), 5, 7);
-        this.shows.get(4).addCustomer(customers.get(2), 5, 8);
-        this.shows.get(5).addCustomer(customers.get(3), 5, 9);
-        this.shows.get(6).addCustomer(customers.get(4), 5, 10);
-        this.shows.get(7).addCustomer(customers.get(1), 5, 11);
+        this.shows.get(0).addCustomer(new Customer("Bart", "Sneek", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 1);
+        this.shows.get(0).addCustomer(new Customer("Bob", "Meskers", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 2);
+        this.shows.get(0).addCustomer(new Customer("Bob", "Meskers", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 3);
+        this.shows.get(1).addCustomer(new Customer("Bob", "Meskers", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 4);
+        this.shows.get(1).addCustomer(new Customer("David", "Davidson", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 5);
+        this.shows.get(2).addCustomer(new Customer("Alice", "Wonderland", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 6);
+        this.shows.get(3).addCustomer(new Customer("Bart", "Sneek", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 7);
+        this.shows.get(4).addCustomer(new Customer("Bob", "Meskers", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 8);
+        this.shows.get(5).addCustomer(new Customer("David", "Davidson", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 9);
+        this.shows.get(6).addCustomer(new Customer("Alice", "Wonderland", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 10);
+        this.shows.get(7).addCustomer(new Customer("Bob", "Meskers", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 11);
     }
 
     public List<User> getUsers() {
@@ -95,8 +88,24 @@ public class Database {
         this.shows.remove(show);
     }
 
-    public void addCustomer(Customer customer) {
-        // Voe een klant toe aan de tijdelijke "database"
-        this.customers.add(customer);
+
+    public void saveDatabase(String filename) {
+        // Sla de "database" op in een binaire fill
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filename))) {
+            outputStream.writeObject(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Database loadDatabase(String filename) {
+        // Probeer de "database" op te halen uit een binaire fill
+        Database database = null;
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(filename))) {
+            database = (Database) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            database = new Database();
+        }
+        return database;
     }
 }

@@ -32,17 +32,18 @@ public class LoginController {
     @FXML
     private Label invalidUserMessage;
 
+    private Database database;
+
     @FXML
     protected void setLoginButton(ActionEvent event) throws IOException {
         // Haal alle gebruikers op uit de "database"
-        Database database = new Database();
         User user = findUser(usernameField.getText(), passwordField.getText(), database);
         if (user != null) {
             // Openen van het nieuwe venster
             FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("main-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             MainController mainController = fxmlLoader.getController();
-            mainController.giveData(user, database);
+            mainController.giveData(user, this.database);
             Stage stage = (Stage) loginButton.getScene().getWindow();
             stage.setTitle("Fantastic Cinema");
             stage.setScene(scene);
@@ -52,6 +53,10 @@ public class LoginController {
             // Maak het bericht zichtbaar dat de verkeerde inloggegevens zijn ingevuld
             invalidUserMessage.setVisible(true);
         }
+    }
+
+    public void giveData(Database database) {
+        this.database = database;
     }
 
     private User findUser(String username, String password, Database database) {

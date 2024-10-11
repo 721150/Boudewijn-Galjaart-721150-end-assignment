@@ -24,6 +24,7 @@ import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -157,11 +158,8 @@ public class SeatsSellTicketsController implements Initializable {
 
     @FXML
     protected void sellButtonClick(ActionEvent event) throws IOException {
-        // Voeg de opgegeven klant toe aan de "database"
-        Customer customer = new Customer(firstnameCustomerTextField.getText(), lastnameCustomerTextField.getText());
-        this.database.addCustomer(customer);
-
         // Haal de geselecteerde positie op en voeg deze toe aan de "database"
+        Customer customer = new Customer(firstnameCustomerTextField.getText(), lastnameCustomerTextField.getText(), LocalDateTime.now());
         List<int[]> selectedSeatsPositions = getSelectedSeatsPositions();
         Show show = this.show;
         for (int[] position : selectedSeatsPositions) {

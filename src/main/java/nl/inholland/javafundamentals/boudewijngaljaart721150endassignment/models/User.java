@@ -2,7 +2,10 @@ package nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.model
 
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.enums.Role;
 
-public class User {
+import java.io.Serializable;
+
+
+public class User implements Serializable {
     private String firstName;
     private String lastName;
     private String username;

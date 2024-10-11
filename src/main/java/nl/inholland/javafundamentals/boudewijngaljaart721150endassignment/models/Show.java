@@ -1,11 +1,12 @@
 package nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Show {
+public class Show implements Serializable {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private String title;
