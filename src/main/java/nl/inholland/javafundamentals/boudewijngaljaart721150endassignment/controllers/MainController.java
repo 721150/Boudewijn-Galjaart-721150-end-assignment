@@ -51,7 +51,10 @@ public class MainController {
         welcomeMassageWhiteName.setText(welcomeMassageWhiteName.getText() + " " + this.user.getFullName());
         welcomeMassageWhiteRole.setText(welcomeMassageWhiteRole.getText() + " " + this.user.getRole().toString().toLowerCase());
         welkomeMessageWhiteDate.setText(welkomeMessageWhiteDate.getText() + " " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+        defineAccessRights();
+    }
 
+    private void defineAccessRights() {
         // Bepaal de rol van de gebruiker en bepaal welke rechten deze heeft
         if (this.user instanceof Manager) {
             sellTicketsButton.setVisible(false);

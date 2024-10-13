@@ -93,17 +93,13 @@ public class Database implements Serializable {
         // Sla de "database" op in een binaire fill
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filename))) {
             outputStream.writeObject(this.shows);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException e) {}
     }
 
     public void loadDatabase(String filename) {
         // Probeer de "database" op te halen uit een binaire fill
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(filename))) {
             this.shows = (List<Show>) inputStream.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            return;
-        }
+        } catch (IOException | ClassNotFoundException e) {}
     }
 }

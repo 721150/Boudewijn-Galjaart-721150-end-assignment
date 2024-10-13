@@ -37,18 +37,23 @@ public class ViewSalesHistoryController implements Initializable {
 
     private void makeCustomerShowing() {
         // Maak een overzicht van de verkochte kaartjes en toon deze
-        for (Show show : database.getShows()) {
+        for (Show show : this.database.getShows()) {
             for (Customer[] row : show.getSeats()) {
                 for (Customer customer : row) {
-                    if (customer != null) {
-                        Optional<TicketInformation> existingOverview = customerShow.stream().filter(ticketOverview -> ticketOverview.getCustomerName().equals(customer.getFullName()) && ticketOverview.getShowTitle().equals(show.getstartTimeDateAndTitle())).findFirst();
-                        if (existingOverview.isPresent()) {
-                            existingOverview.get().setTicketsSold(existingOverview.get().getTicketsSold() + 1);
-                        } else {
-                            customerShow.add(new TicketInformation(customer.getFullName(), show.getstartTimeDateAndTitle(), customer.getDateTimeofBuyTicket().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), 1));
-                        }
-                    }
+                    addCustomerToShowing(show, customer);
                 }
+            }
+        }
+    }
+
+    private void addCustomerToShowing(Show show, Customer customer) {
+        // Voeg de klant toe aan de verzameling die wordt getoont op het scherm
+        if (customer != null) {
+            Optional<TicketInformation> existingOverview = this.customerShow.stream().filter(ticketOverview -> ticketOverview.getCustomerName().equals(customer.getFullName()) && ticketOverview.getShowTitle().equals(show.getstartTimeDateAndTitle())).findFirst();
+            if (existingOverview.isPresent()) {
+                existingOverview.get().setTicketsSold(existingOverview.get().getTicketsSold() + 1);
+            } else {
+                this.customerShow.add(new TicketInformation(customer.getFullName(), show.getstartTimeDateAndTitle(), customer.getDateTimeofBuyTicket().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), 1));
             }
         }
     }

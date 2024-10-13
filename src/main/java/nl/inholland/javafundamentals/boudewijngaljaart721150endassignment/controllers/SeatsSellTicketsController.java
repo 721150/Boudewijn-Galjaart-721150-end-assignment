@@ -6,10 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -110,12 +107,14 @@ public class SeatsSellTicketsController implements Initializable {
         Color currentColor = (Color) seat.getFill();
         if (currentColor == Color.RED) {
             sellFailMessage.setVisible(true);
-        } else if (currentColor == Color.GREEN) {
+        }
+        else if (currentColor == Color.GREEN) {
             seat.setFill(Color.GRAY);
             selectedSeatsTextArea.setText(selectedSeatsTextArea.getText().replace("Row " + currentRow + "/Seat " + currentCol + "\n", ""));
             sellFailMessage.setVisible(false);
             this.selectedSeatsCount--;
-        } else {
+        }
+        else {
             seat.setFill(Color.GREEN);
             selectedSeatsTextArea.appendText("Row " + currentRow + "/Seat " + currentCol + "\n");
             sellFailMessage.setVisible(false);
@@ -162,7 +161,17 @@ public class SeatsSellTicketsController implements Initializable {
             show.addCustomer(customer, position[0] - 1, position[1] - 1);
             this.database.editShow(this.show, show);
         }
+        showSuccessPopup("Selling tickets was successful.");
         openManageShowingsScreen();
+    }
+
+    private void showSuccessPopup(String message) {
+        // Toon een melding aan de gebruiker om te bevestigen dat de actie is geslaagd
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Action successful");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     @FXML

@@ -30,7 +30,7 @@
             <columns>
                 <TableColumn prefWidth="141.99999940395355" text="Date/time">
                     <cellValueFactory>
-                        <PropertyValueFactory property="purchaseDateTime" />
+                        <PropertyValueFactory property="dateTimeofBuyTicket" />
                     </cellValueFactory>
                 </TableColumn>
                 <TableColumn prefWidth="148.99998474121094" text="Number of tickets">

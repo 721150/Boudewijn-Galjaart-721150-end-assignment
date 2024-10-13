@@ -3,30 +3,30 @@ package nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.model
 public class TicketInformation {
     private String customerName;
     private String showTitle;
-    private String purchaseDateTime;
+    private String dateTimeofBuyTicket;
     private int ticketsSold;
 
-    public TicketInformation(String customerName, String showTitle, String purchaseDateTime, int ticketsSold) {
+    public TicketInformation(String customerName, String showTitle, String dateTimeofBuyTicket, int ticketsSold) {
         this.customerName = customerName;
         this.showTitle = showTitle;
-        this.purchaseDateTime = purchaseDateTime;
+        this.dateTimeofBuyTicket = dateTimeofBuyTicket;
         this.ticketsSold = ticketsSold;
     }
 
     public String getCustomerName() {
-        return customerName;
+        return this.customerName;
     }
 
     public String getShowTitle() {
-        return showTitle;
+        return this.showTitle;
     }
 
-    public String getPurchaseDateTime() {
-        return purchaseDateTime;
+    public String getDateTimeofBuyTicket() {
+        return this.dateTimeofBuyTicket;
     }
 
     public int getTicketsSold() {
-        return ticketsSold;
+        return this.ticketsSold;
     }
 
     public void setTicketsSold(int ticketsSold) {

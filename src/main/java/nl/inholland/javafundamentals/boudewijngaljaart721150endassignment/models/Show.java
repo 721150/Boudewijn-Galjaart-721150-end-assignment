@@ -3,7 +3,6 @@ package nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.model
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Show implements Serializable {
@@ -28,30 +27,22 @@ public class Show implements Serializable {
 
     public String getStartDateTime() {
         // Format van de datum en tijd omzetten
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        String startDateTime = this.startDateTime.format(formatter);
-        return startDateTime;
+        return this.startDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
     public String getEndDateTime() {
         // Format van de datum en tijd omzetten
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        String endDateTime = this.endDateTime.format(formatter);
-        return endDateTime;
+        return this.endDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
     public String getStartTime() {
         // Format van de tijd omzetten en de datum weglaten
-        LocalTime startTime = this.startDateTime.toLocalTime();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        return startTime.format(formatter);
+        return this.startDateTime.toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     public String getEndTime() {
         // Format van de tijd omzetten en de datum weglaten
-        LocalTime endTime = this.endDateTime.toLocalTime();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        return endTime.format(formatter);
+        return this.endDateTime.toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     public LocalDate getStartDate() {
@@ -65,17 +56,19 @@ public class Show implements Serializable {
     }
 
     public String getTitle() {
-        return title;
+        // Geef de titel van de voorstelling terug
+        return this.title;
     }
 
     public Customer[][] getSeats() {
-        return seats;
+        // Geef de verzameling van zitplaatsen terug
+        return this.seats;
     }
 
     public int getNumberOfSeatsLeft() {
         // Bereken het aantal vrije stoelen en geef dit terug
         int numberOfSeatsLeft = 0;
-        for (Customer[] row : seats) {
+        for (Customer[] row : this.seats) {
             for (Customer seat : row) {
                 if (seat == null) {
                     numberOfSeatsLeft += 1;
@@ -85,47 +78,15 @@ public class Show implements Serializable {
         return numberOfSeatsLeft;
     }
 
-    public int getNumberOfSeatsSolt() {
-        // Bereken het aantal vrije stoelen en geef dit terug
-        int numberOfSeatsLeft = 0;
-        for (Customer[] row : seats) {
-            for (Customer seat : row) {
-                if (seat != null) {
-                    numberOfSeatsLeft += 1;
-                }
-            }
-        }
-        return numberOfSeatsLeft;
-    }
-
-    public void setStartDateTime(LocalDateTime startDateTime) {
-        this.startDateTime = startDateTime;
-    }
-
-    public void setEndDateTime(LocalDateTime endDateTime) {
-        this.endDateTime = endDateTime;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void addCustomer(Customer customer, int row, int col) {
-        if (seats[row][col] == null) {
-            seats[row][col] = customer;
-        }
-    }
-
     public String getNumberOfSeatsLeftAndAvalableSeats() {
-        int numberOfSeatsLeft = getNumberOfSeatsLeft();
-        int availableSeats = this.seats.length * this.seats[0].length;
-        return numberOfSeatsLeft + "/" + availableSeats;
+        // Bepaal het aantal beschikbare en totaal aantal stoelen en geef dit terug
+        return getNumberOfSeatsLeft() + "/" + getTotalNumberOfSeats();
     }
 
     public int getTotalNumberOfSeats() {
         // Bereken het aantal stoelen en geef dit terug
         int numberOfSeats = 0;
-        for (Customer[] row : seats) {
+        for (Customer[] row : this.seats) {
             for (Customer seat : row) {
                 numberOfSeats += 1;
             }
@@ -136,5 +97,12 @@ public class Show implements Serializable {
     public String getstartTimeDateAndTitle() {
         // Geef de starttijd en datum met titel terug
         return this.startDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")) + " " + this.title;
+    }
+
+    public void addCustomer(Customer customer, int row, int col) {
+        // Voeg een klant toe aan de voorstelling op de opgegeven positie
+        if (this.seats[row][col] == null) {
+            this.seats[row][col] = customer;
+        }
     }
 }

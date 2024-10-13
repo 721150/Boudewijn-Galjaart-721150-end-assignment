@@ -5,16 +5,13 @@ import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models
 import java.io.Serializable;
 
 
-public class User implements Serializable {
-    private String firstName;
-    private String lastName;
+public class User extends Person implements Serializable {
     private String username;
     private String password;
     protected Role role;
 
     public User(String firstName, String lastName, String username, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        super(firstName, lastName);
         this.username = username;
         this.password = password;
     }
@@ -29,9 +26,5 @@ public class User implements Serializable {
 
     public Role getRole() {
         return this.role;
-    }
-
-    public String getFullName() {
-        return this.firstName + " " + this.lastName;
     }
 }

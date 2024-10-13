@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
@@ -14,7 +15,6 @@ import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartA
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.enums.Screen;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Show;
-import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -54,22 +54,36 @@ public class ManageShowingsController implements Initializable {
     @FXML
     protected void editShowingButtonClick(ActionEvent actionEvent) throws IOException {
         // Toon het scherm voor het bewerken van een voorstelling in de VBox
-        Show show = (Show)showingsTableInformationTebleView.getSelectionModel().getSelectedItem();
-        loadShowingsVBox(show, Screen.EDIT);
+        loadShowingsVBox(getSelectedItem(), Screen.EDIT);
     }
 
     @FXML
     protected void deleteShowingButtonClick(ActionEvent actionEvent) throws IOException {
         // Verwijder een voorstellign uit de VBox en verzameling (alleen indien geen kaarten zijn verkocht)
-        Show show = (Show)showingsTableInformationTebleView.getSelectionModel().getSelectedItem();
+        Show show = getSelectedItem();
         if (show.getNumberOfSeatsLeft() == show.getTotalNumberOfSeats()) {
             this.database.deleteShow(show);
             this.shows.remove(show);
+            showSuccessPopup("Show successfully deleted");
         }
         else {
             // Toon het bericht dat een voorstelling niet kan worden verwijderd
             deleteFailMessage.setVisible(true);
         }
+    }
+
+    private void showSuccessPopup(String message) {
+        // Toon een melding aan de gebruiker om te bevestigen dat de actie is geslaagd
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Action successful");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private Show getSelectedItem() {
+        // Haal de geselecteerde voorstelling op uit de tabel
+        return (Show) showingsTableInformationTebleView.getSelectionModel().getSelectedItem();
     }
 
     private void loadShowingsVBox(Show show, Screen screen) throws IOException {

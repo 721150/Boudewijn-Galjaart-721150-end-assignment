@@ -4,16 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartApplication;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.enums.Screen;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Show;
-import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -122,14 +118,25 @@ public class AddShowingController implements Initializable {
 
     private void addShowToDatabase(LocalDateTime startDateTime, LocalDateTime endDateTime, String title) {
         // Maak een nieuwe voorstelling aan of wijzig deze in de "database"
-        if (mode.equals(Screen.ADD)) {
+        if (this.mode.equals(Screen.ADD)) {
             Show newShow = new Show(startDateTime, endDateTime, title);
             this.database.addShow(newShow);
+            showSuccessPopup("Show successfully added");
         }
-        else if (mode.equals(Screen.EDIT)) {
+        else if (this.mode.equals(Screen.EDIT)) {
             Show editShow = new Show(startDateTime, endDateTime, title, this.show.getSeats());
             this.database.editShow(this.show, editShow);
+            showSuccessPopup("Show successfully changed");
         }
+    }
+
+    private void showSuccessPopup(String message) {
+        // Toon een melding aan de gebruiker om te bevestigen dat de actie is geslaagd
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Action successful");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     private boolean checkValitInput(String title) {

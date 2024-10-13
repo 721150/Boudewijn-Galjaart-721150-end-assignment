@@ -36,20 +36,24 @@ public class LoginController {
         // Haal alle gebruikers op uit de "database"
         User user = findUser(usernameField.getText(), passwordField.getText(), database);
         if (user != null) {
-            // Openen van het nieuwe venster
-            FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("main-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            MainController mainController = fxmlLoader.getController();
-            mainController.giveData(user, this.database);
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-            stage.setTitle("Fantastic Cinema");
-            stage.setScene(scene);
-            stage.show();
+            openMainWindow(user);
         }
         else {
             // Maak het bericht zichtbaar dat de verkeerde inloggegevens zijn ingevuld
             invalidUserMessage.setVisible(true);
         }
+    }
+
+    private void openMainWindow(User user) throws IOException {
+        // Openen van het nieuwe venster
+        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("main-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        MainController mainController = fxmlLoader.getController();
+        mainController.giveData(user, this.database);
+        Stage stage = (Stage) loginButton.getScene().getWindow();
+        stage.setTitle("Fantastic Cinema");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void giveData(Database database) {
