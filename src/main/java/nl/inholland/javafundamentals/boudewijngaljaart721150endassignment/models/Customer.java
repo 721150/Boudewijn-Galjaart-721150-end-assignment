@@ -14,12 +14,8 @@ public class Customer implements Serializable {
         this.dateTimeofBuyTicket = dateTimeofBuyTicket;
     }
 
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    public String getLastName() {
-        return this.lastName;
+    public String getFullName() {
+        return this.firstName + " " + this.lastName;
     }
 
     public LocalDateTime getDateTimeofBuyTicket() {

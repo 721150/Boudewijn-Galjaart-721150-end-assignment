@@ -67,7 +67,7 @@ public class MainController {
         // Toon het scherm voor het beheren van de voorstellingen in de VBox
         FXMLLoader fxmlLoader = loadShowingsVBox("manage-showings-view.fxml");
         ManageShowingsController manageShowingsController = fxmlLoader.getController();
-        manageShowingsController.giveData(this.user, this.database);
+        manageShowingsController.giveData(this.database);
     }
 
     @FXML
@@ -75,7 +75,7 @@ public class MainController {
         // Toon het scherm voor het overzicht van de verkopen in de VBox
         FXMLLoader fxmlLoader = loadShowingsVBox("view-sales-history-view.fxml");
         ViewSalesHistoryController viewSalesHistoryController = fxmlLoader.getController();
-        viewSalesHistoryController.giveData(this.user, this.database);
+        viewSalesHistoryController.giveData(this.database);
     }
 
     @FXML
@@ -83,7 +83,7 @@ public class MainController {
         // Toon het scherm voor het betellen van de kaarten in de VBox
         FXMLLoader fxmlLoader = loadShowingsVBox("sell-tickets-view.fxml");
         SellTicketsController sellTicketsController = fxmlLoader.getController();
-        sellTicketsController.giveData(this.user, this.database);
+        sellTicketsController.giveData(this.database);
     }
 
     private FXMLLoader loadShowingsVBox(String name) throws IOException {

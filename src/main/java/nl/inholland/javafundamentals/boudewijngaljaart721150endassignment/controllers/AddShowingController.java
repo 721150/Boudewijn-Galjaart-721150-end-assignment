@@ -53,16 +53,13 @@ public class AddShowingController implements Initializable {
     @FXML
     private Button addShowingsButton;
 
-    private User user;
-
     private Database database;
 
     private Show show;
 
     private Screen mode;
 
-    public void giveData(User user, Database database, Show show, Screen mode) {
-        this.user = user;
+    public void giveData(Database database, Show show, Screen mode) {
         this.database = database;
         this.show = show;
         this.mode = mode;
@@ -150,7 +147,7 @@ public class AddShowingController implements Initializable {
         VBox vBox = fxmlLoader.load();
         mainScreenVBox.getChildren().setAll(vBox);
         ManageShowingsController manageShowingsController = fxmlLoader.getController();
-        manageShowingsController.giveData(this.user, this.database);
+        manageShowingsController.giveData(this.database);
     }
 
     private void loadShow() {

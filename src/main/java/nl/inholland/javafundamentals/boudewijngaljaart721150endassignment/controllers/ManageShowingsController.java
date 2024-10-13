@@ -36,14 +36,11 @@ public class ManageShowingsController implements Initializable {
     @FXML
     private Label deleteFailMessage;
 
-    private User user;
-
     private Database database;
 
     private ObservableList<Show> shows = FXCollections.observableArrayList();
 
-    public void giveData(User user, Database database) {
-        this.user = user;
+    public void giveData(Database database) {
         this.database = database;
         this.shows.setAll(this.database.getShows());
     }
@@ -81,7 +78,7 @@ public class ManageShowingsController implements Initializable {
         VBox vBox = fxmlLoader.load();
         mainScreenVBox.getChildren().setAll(vBox);
         AddShowingController addShowingController = fxmlLoader.getController();
-        addShowingController.giveData(this.user, this.database, show, screen);
+        addShowingController.giveData(this.database, show, screen);
     }
 
     @Override

@@ -13,13 +13,13 @@ public class StartApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Database database = new Database();
-        Database db = database.loadDatabase("database.ser");
+        database.loadDatabase("database.ser");
         FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         LoginController loginController = fxmlLoader.getController();
-        loginController.giveData(db);
+        loginController.giveData(database);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            db.saveDatabase("database.ser");
+            database.saveDatabase("database.ser");
         }));
         stage.setTitle("Login");
         stage.setScene(scene);

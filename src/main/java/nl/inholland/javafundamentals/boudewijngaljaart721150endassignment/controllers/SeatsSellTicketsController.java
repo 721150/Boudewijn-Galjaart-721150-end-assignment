@@ -20,7 +20,6 @@ import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartA
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Customer;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Show;
-import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,8 +29,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class SeatsSellTicketsController implements Initializable {
-    private User user;
-
     private Database database;
 
     private Show show;
@@ -62,8 +59,7 @@ public class SeatsSellTicketsController implements Initializable {
 
     private int selectedSeatsCount;
 
-    public void giveData(User user, Database database, Show show) {
-        this.user = user;
+    public void giveData(Database database, Show show) {
         this.database = database;
         this.show = show;
         informationAboutSelectedShowLabel.setText(this.show.getStartDateTime() + " " + this.show.getTitle());
@@ -180,7 +176,7 @@ public class SeatsSellTicketsController implements Initializable {
         VBox vBox = fxmlLoader.load();
         mainScreenVBox.getChildren().setAll(vBox);
         SellTicketsController sellTicketsController = fxmlLoader.getController();
-        sellTicketsController.giveData(this.user, this.database);
+        sellTicketsController.giveData(this.database);
     }
 
     private List<int[]> getSelectedSeatsPositions() {

@@ -132,4 +132,9 @@ public class Show implements Serializable {
         }
         return numberOfSeats;
     }
+
+    public String getstartTimeDateAndTitle() {
+        // Geef de starttijd en datum met titel terug
+        return this.startDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")) + " " + this.title;
+    }
 }

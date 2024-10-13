@@ -13,7 +13,6 @@ import javafx.scene.layout.VBox;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartApplication;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Show;
-import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,14 +31,11 @@ public class SellTicketsController implements Initializable {
     @FXML
     private VBox mainScreenVBox;
 
-    private User user;
-
     private Database database;
 
     private ObservableList<Show> shows = FXCollections.observableArrayList();
 
-    public void giveData(User user, Database database) {
-        this.user = user;
+    public void giveData(Database database) {
         this.database = database;
         this.shows.setAll(this.database.getCurrentShows());
     }
@@ -67,7 +63,7 @@ public class SellTicketsController implements Initializable {
         VBox vBox = fxmlLoader.load();
         mainScreenVBox.getChildren().setAll(vBox);
         SeatsSellTicketsController seatsSellTicketsController = fxmlLoader.getController();
-        seatsSellTicketsController.giveData(this.user, this.database, getSelectedShow());
+        seatsSellTicketsController.giveData(this.database, getSelectedShow());
     }
 
     private Show getSelectedShow() {
