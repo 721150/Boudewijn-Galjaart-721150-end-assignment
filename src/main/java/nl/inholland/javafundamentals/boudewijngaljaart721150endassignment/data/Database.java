@@ -31,18 +31,25 @@ public class Database implements Serializable {
         this.shows.add(new Show(LocalDateTime.of(2024, 12, 1, 17, 0), LocalDateTime.of(2024, 12, 1, 19, 30), "Spider-Man: No Way Home"));
         this.shows.add(new Show(LocalDateTime.of(2024, 12, 10, 20, 0), LocalDateTime.of(2024, 12, 10, 22, 30), "The Matrix Resurrections"));
 
+        // Aanmaken van de klanten en kooptijd
+        LocalDateTime byDateTime = LocalDateTime.of(2024, 10, 11, 16, 30);
+        Customer customerOne = new Customer("Bart", "Sneek", byDateTime);
+        Customer customerTwo = new Customer("Bob", "Meskers", byDateTime);
+        Customer customerThree = new Customer("David", "Davidson", byDateTime);
+        Customer customerFour = new Customer("Alice", "Wonderland", byDateTime);
+
         // Voeg klanten toe aan de voorstellingen
-        this.shows.get(0).addCustomer(new Customer("Bart", "Sneek", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 1);
-        this.shows.get(0).addCustomer(new Customer("Bob", "Meskers", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 2);
-        this.shows.get(0).addCustomer(new Customer("Bob", "Meskers", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 3);
-        this.shows.get(1).addCustomer(new Customer("Bob", "Meskers", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 4);
-        this.shows.get(1).addCustomer(new Customer("David", "Davidson", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 5);
-        this.shows.get(2).addCustomer(new Customer("Alice", "Wonderland", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 6);
-        this.shows.get(3).addCustomer(new Customer("Bart", "Sneek", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 7);
-        this.shows.get(4).addCustomer(new Customer("Bob", "Meskers", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 8);
-        this.shows.get(5).addCustomer(new Customer("David", "Davidson", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 9);
-        this.shows.get(6).addCustomer(new Customer("Alice", "Wonderland", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 10);
-        this.shows.get(7).addCustomer(new Customer("Bob", "Meskers", LocalDateTime.of(2024, 10, 11, 16, 30)), 5, 11);
+        this.shows.get(0).addCustomer(customerOne, 5, 1);
+        this.shows.get(0).addCustomer(customerTwo, 5, 2);
+        this.shows.get(0).addCustomer(customerTwo, 5, 3);
+        this.shows.get(1).addCustomer(customerTwo, 5, 4);
+        this.shows.get(1).addCustomer(customerThree, 5, 5);
+        this.shows.get(2).addCustomer(customerFour, 5, 6);
+        this.shows.get(3).addCustomer(customerOne, 5, 7);
+        this.shows.get(4).addCustomer(customerTwo, 5, 8);
+        this.shows.get(5).addCustomer(customerThree, 5, 9);
+        this.shows.get(6).addCustomer(customerFour, 5, 10);
+        this.shows.get(7).addCustomer(customerTwo, 5, 11);
     }
 
     public List<User> getUsers() {

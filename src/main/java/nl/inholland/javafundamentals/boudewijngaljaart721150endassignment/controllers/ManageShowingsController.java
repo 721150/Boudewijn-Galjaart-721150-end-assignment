@@ -64,7 +64,7 @@ public class ManageShowingsController implements Initializable {
         if (show.getNumberOfSeatsLeft() == show.getTotalNumberOfSeats()) {
             this.database.deleteShow(show);
             this.shows.remove(show);
-            showSuccessPopup("Show successfully deleted");
+            showSuccessPopup("Show \"" + show.getTitle() + "\" successfully deleted");
         }
         else {
             // Toon het bericht dat een voorstelling niet kan worden verwijderd

@@ -121,12 +121,12 @@ public class AddShowingController implements Initializable {
         if (this.mode.equals(Screen.ADD)) {
             Show newShow = new Show(startDateTime, endDateTime, title);
             this.database.addShow(newShow);
-            showSuccessPopup("Show successfully added");
+            showSuccessPopup("Show \"" + newShow.getTitle() +"\" successfully added");
         }
         else if (this.mode.equals(Screen.EDIT)) {
             Show editShow = new Show(startDateTime, endDateTime, title, this.show.getSeats());
             this.database.editShow(this.show, editShow);
-            showSuccessPopup("Show successfully changed");
+            showSuccessPopup("Show \"" + editShow.getTitle() + "\" successfully changed");
         }
     }
 

@@ -161,7 +161,7 @@ public class SeatsSellTicketsController implements Initializable {
             show.addCustomer(customer, position[0] - 1, position[1] - 1);
             this.database.editShow(this.show, show);
         }
-        showSuccessPopup("Selling tickets was successful.");
+        showSuccessPopup("Selling " + this.selectedSeatsCount + " ticket(s) to " + customer.getFullName() + " was successful.");
         openManageShowingsScreen();
     }
 
