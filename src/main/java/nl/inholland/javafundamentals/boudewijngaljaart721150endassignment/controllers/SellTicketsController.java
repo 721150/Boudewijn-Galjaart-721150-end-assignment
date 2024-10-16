@@ -16,6 +16,7 @@ import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 
 public class SellTicketsController implements Initializable, Controller {
@@ -38,6 +39,12 @@ public class SellTicketsController implements Initializable, Controller {
     public void giveData(Database database) {
         this.database = database;
         this.shows.setAll(this.database.getCurrentShows());
+        sortShowsByStartDateTime();
+    }
+
+    private void sortShowsByStartDateTime() {
+        // Sorteer de voorstelling op de begin datum/tijd
+        FXCollections.sort(this.shows, Comparator.comparing(Show::getStartDateTime));
     }
 
     @Override

@@ -137,7 +137,35 @@ public class AddShowingController implements Initializable, Controller {
             displayErrorMessage("No title entered, enter field title. Such as To Sir, with Love");
             return true;
         }
+        else if (startDateDatePicker.getValue() == null || startTimeTextField.getText().isEmpty() ||
+                endDateDatePicker.getValue() == null || endTimeTextField.getText().isEmpty()) {
+            displayErrorMessage("No date and/or time entered, enter field date / time. Such as 12-04-2024 / 13:15.");
+            return true;
+        }
+        else if (!isValidDate(startDateDatePicker.getEditor().getText()) || !isValidDate(endDateDatePicker.getEditor().getText()) ||
+                !isValidTime(startTimeTextField.getText()) || !isValidTime(endTimeTextField.getText())) {
+            displayErrorMessage("Incorrect format date / time, use DD-MM-YYYY / HH:MM. Such as 12-04-2024 / 13:15.");
+            return true;
+        }
         return false;
+    }
+
+    private boolean isValidDate(String date) {
+        try {
+            LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    private boolean isValidTime(String time) {
+        try {
+            LocalTime.parse(time, getTimeFormatter());
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     private void openManageShowingsScreen() throws IOException {
@@ -158,8 +186,9 @@ public class AddShowingController implements Initializable, Controller {
 
     private void loadEditScreen() {
         // Steld de tekst in naar een bewerken scherm
-        addShowingTitleLabel.setText("Edit showing");
-        addShowingsButton.setText("Edit showing");
+        String editScreenTitle = "Edit showing";
+        addShowingTitleLabel.setText(editScreenTitle);
+        addShowingsButton.setText(editScreenTitle);
     }
 
     @FXML
