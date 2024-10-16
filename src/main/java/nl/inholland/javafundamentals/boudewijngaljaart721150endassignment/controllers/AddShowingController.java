@@ -227,11 +227,11 @@ public class AddShowingController implements Initializable, Controller {
 
     private void validDateDatePicker(DatePicker datePicker) {
         // Geef een melding weer op het moment dat een verkeert format van de datum is ingevoerd
-        try {
-            LocalDate.parse(datePicker.getEditor().getText(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        if (isValidDate(datePicker.getEditor().getText())) {
             invalidDataMessage.setVisible(false);
             datePicker.setStyle("");
-        } catch (DateTimeParseException e) {
+        }
+        else {
             displayErrorMessage("Incorrect format date, use DD-MM-YYYY. Such as 12-04-2024.");
             datePicker.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
         }
@@ -239,11 +239,11 @@ public class AddShowingController implements Initializable, Controller {
 
     private void validTimeTextField(TextField textField) {
         // Geeft een melding weer op het moment dat een verkeert format van de datum is ingevoerd
-        try {
-            LocalTime.parse(textField.getText(), getTimeFormatter());
+        if (isValidTime(textField.getText())) {
             invalidDataMessage.setVisible(false);
             textField.setStyle("");
-        } catch (Exception exception) {
+        }
+        else {
             displayErrorMessage("Incorrect format time, use HH:MM. Such as 13:15.");
             textField.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
         }
