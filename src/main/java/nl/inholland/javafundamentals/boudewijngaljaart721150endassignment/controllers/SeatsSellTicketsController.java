@@ -136,15 +136,22 @@ public class SeatsSellTicketsController implements Initializable, Controller {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Maak de bestelknop klikbaar op het moment dat de voor- en achternaam van de klant zijn ingevuld
+        // Maak de bestelknop klikbaar op het moment dat de voor- en achternaam van de klant zijn ingevuld en minstens één stoel is geselecteerd
         ChangeListener<String> textChangeListener = new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                sellSeatsTicketsButton.setDisable(firstnameCustomerTextField.getText().trim().isEmpty() || lastnameCustomerTextField.getText().trim().isEmpty());
+                updateSellButtonState();
             }
         };
         firstnameCustomerTextField.textProperty().addListener(textChangeListener);
         lastnameCustomerTextField.textProperty().addListener(textChangeListener);
+        selectedSeatsTextArea.textProperty().addListener(textChangeListener);
+    }
+
+    private void updateSellButtonState() {
+        boolean isCustomerInfoFilled = firstnameCustomerTextField.getText().trim().isEmpty() || lastnameCustomerTextField.getText().trim().isEmpty();
+        boolean isSeatSelected = this.selectedSeatsTextArea.getText().trim().isEmpty();
+        sellSeatsTicketsButton.setDisable(isCustomerInfoFilled || isSeatSelected);
     }
 
     private void updateSellButtonLabel() {
