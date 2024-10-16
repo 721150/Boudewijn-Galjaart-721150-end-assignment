@@ -19,30 +19,28 @@ public class Show implements Serializable {
     }
 
     public Show(LocalDateTime startDateTime, LocalDateTime endDateTime, String title, Customer[][] seats) {
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
-        this.title = title;
+        this(startDateTime, endDateTime, title);
         this.seats = seats;
     }
 
     public String getStartDateTime() {
         // Format van de datum en tijd omzetten
-        return this.startDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        return this.startDateTime.format(getDateTimeFormatter());
     }
 
     public String getEndDateTime() {
         // Format van de datum en tijd omzetten
-        return this.endDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        return this.endDateTime.format(getDateTimeFormatter());
     }
 
     public String getStartTime() {
         // Format van de tijd omzetten en de datum weglaten
-        return this.startDateTime.toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm"));
+        return this.startDateTime.toLocalTime().format(getTimeFormatter());
     }
 
     public String getEndTime() {
         // Format van de tijd omzetten en de datum weglaten
-        return this.endDateTime.toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm"));
+        return this.endDateTime.toLocalTime().format(getTimeFormatter());
     }
 
     public LocalDate getStartDate() {
@@ -96,7 +94,7 @@ public class Show implements Serializable {
 
     public String getstartTimeDateAndTitle() {
         // Geef de starttijd en datum met titel terug
-        return this.startDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")) + " " + this.title;
+        return this.startDateTime.format(getDateTimeFormatter()) + " " + this.title;
     }
 
     public void addCustomer(Customer customer, int row, int col) {
@@ -104,5 +102,13 @@ public class Show implements Serializable {
         if (this.seats[row][col] == null) {
             this.seats[row][col] = customer;
         }
+    }
+
+    private DateTimeFormatter getTimeFormatter() {
+        return DateTimeFormatter.ofPattern("HH:mm");
+    }
+
+    private DateTimeFormatter getDateTimeFormatter() {
+        return DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
     }
 }

@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
-import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartApplication;
+import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.interfaces.Controller;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Show;
 
@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SellTicketsController implements Initializable {
+public class SellTicketsController implements Initializable, Controller {
     @FXML
     private TableView showingsTableInformationTebleView;
 
@@ -59,9 +59,7 @@ public class SellTicketsController implements Initializable {
     @FXML
     protected void selectSeatsButtonAction(ActionEvent event) throws IOException {
         // Toon het scherm in de VBox
-        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("seats-sell-tickets-view.fxml"));
-        VBox vBox = fxmlLoader.load();
-        mainScreenVBox.getChildren().setAll(vBox);
+        FXMLLoader fxmlLoader = loadShowingsVBox(mainScreenVBox, "seats-sell-tickets-view.fxml");
         SeatsSellTicketsController seatsSellTicketsController = fxmlLoader.getController();
         seatsSellTicketsController.giveData(this.database, getSelectedShow());
     }

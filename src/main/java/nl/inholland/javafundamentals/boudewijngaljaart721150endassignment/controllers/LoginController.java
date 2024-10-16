@@ -34,7 +34,7 @@ public class LoginController {
     @FXML
     protected void setLoginButton(ActionEvent event) throws IOException {
         // Haal alle gebruikers op uit de "database"
-        User user = findUser(usernameField.getText(), passwordField.getText(), database);
+        User user = findUser(usernameField.getText(), passwordField.getText(), this.database);
         if (user != null) {
             openMainWindow(user);
         }

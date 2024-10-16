@@ -65,9 +65,8 @@ public class Database implements Serializable {
     public List<Show> getCurrentShows() {
         // Geef alle voorstellinge door die nog moeten worden gehouden
         List<Show> currentShows = new ArrayList<>();
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         for (Show show : this.shows) {
-            if (show.getStartDate().isAfter(LocalDate.now()) || show.getStartDate().isEqual(LocalDate.now()) && LocalTime.parse(show.getStartTime(), timeFormatter).isAfter(LocalTime.now()))
+            if (show.getStartDate().isAfter(LocalDate.now()) || show.getStartDate().isEqual(LocalDate.now()) && LocalTime.parse(show.getStartTime(), DateTimeFormatter.ofPattern("HH:mm")).isAfter(LocalTime.now()))
             {
                 currentShows.add(show);
             }

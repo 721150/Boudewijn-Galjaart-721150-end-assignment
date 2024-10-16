@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartApplication;
+import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.interfaces.Controller;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Customer;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Show;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class SeatsSellTicketsController implements Initializable {
+public class SeatsSellTicketsController implements Initializable, Controller {
     private Database database;
 
     private Show show;
@@ -59,8 +59,12 @@ public class SeatsSellTicketsController implements Initializable {
     public void giveData(Database database, Show show) {
         this.database = database;
         this.show = show;
-        informationAboutSelectedShowLabel.setText(this.show.getStartDateTime() + " " + this.show.getTitle());
         this.selectedSeatsCount = 0;
+        loadScreen();
+    }
+
+    private void loadScreen() {
+        informationAboutSelectedShowLabel.setText(this.show.getStartDateTime() + " " + this.show.getTitle());
         loadSeatsInGridPane();
     }
 
@@ -105,18 +109,19 @@ public class SeatsSellTicketsController implements Initializable {
     private void handleSeatClick(Rectangle seat, int currentRow, int currentCol) {
         // Zet de kleur van de zitplek naar de status en voeg deze toe of verwijder deze van de lijst met geslecteerde plaatsen
         Color currentColor = (Color) seat.getFill();
+        String selectedSeat = "Row " + currentRow + "/Seat " + currentCol + "\n";
         if (currentColor == Color.RED) {
             sellFailMessage.setVisible(true);
         }
         else if (currentColor == Color.GREEN) {
             seat.setFill(Color.GRAY);
-            selectedSeatsTextArea.setText(selectedSeatsTextArea.getText().replace("Row " + currentRow + "/Seat " + currentCol + "\n", ""));
+            selectedSeatsTextArea.setText(selectedSeatsTextArea.getText().replace(selectedSeat, ""));
             sellFailMessage.setVisible(false);
             this.selectedSeatsCount--;
         }
         else {
             seat.setFill(Color.GREEN);
-            selectedSeatsTextArea.appendText("Row " + currentRow + "/Seat " + currentCol + "\n");
+            selectedSeatsTextArea.appendText(selectedSeat);
             sellFailMessage.setVisible(false);
             this.selectedSeatsCount++;
         }
@@ -165,15 +170,6 @@ public class SeatsSellTicketsController implements Initializable {
         openManageShowingsScreen();
     }
 
-    private void showSuccessPopup(String message) {
-        // Toon een melding aan de gebruiker om te bevestigen dat de actie is geslaagd
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Action successful");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
     @FXML
     protected void cancelButtonClick(ActionEvent event) throws IOException {
         openManageShowingsScreen();
@@ -181,9 +177,7 @@ public class SeatsSellTicketsController implements Initializable {
 
     private void openManageShowingsScreen() throws IOException {
         // Open het scherm voor het beheren van de voorstellingen in de VBox
-        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("sell-tickets-view.fxml"));
-        VBox vBox = fxmlLoader.load();
-        mainScreenVBox.getChildren().setAll(vBox);
+        FXMLLoader fxmlLoader = loadShowingsVBox(mainScreenVBox, "sell-tickets-view.fxml");
         SellTicketsController sellTicketsController = fxmlLoader.getController();
         sellTicketsController.giveData(this.database);
     }

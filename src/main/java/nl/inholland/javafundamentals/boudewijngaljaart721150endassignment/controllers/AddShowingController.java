@@ -6,20 +6,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartApplication;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.enums.Screen;
+import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.interfaces.Controller;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Show;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ResourceBundle;
 
-public class AddShowingController implements Initializable {
+public class AddShowingController implements Initializable, Controller {
     private final int DURATION_SHOW = 150;
 
     @FXML
@@ -59,16 +60,17 @@ public class AddShowingController implements Initializable {
         this.database = database;
         this.show = show;
         this.mode = mode;
-        if (mode.equals(Screen.EDIT)) {
-            loadShow();
-            loadEditScreen();
-        }
         loadScreen();
     }
 
     private void loadScreen() {
         // Stel het titelveld in als het geselecteerde veld
         titleTextField.requestFocus();
+
+        if (mode.equals(Screen.EDIT)) {
+            loadShow();
+            loadEditScreen();
+        }
     }
 
     @FXML
@@ -84,7 +86,6 @@ public class AddShowingController implements Initializable {
     private void handleAddOrEdit() throws IOException {
         String title = titleTextField.getText();
         LocalDateTime startDateTime; LocalDateTime endDateTime;
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
         if (checkValitInput(title)) {
             return;
@@ -92,8 +93,8 @@ public class AddShowingController implements Initializable {
 
         // Zet de data van het datumveld en tijdveld om naar een LocalDateTime en controleer of dit in het goede format is
         try {
-            startDateTime = LocalDateTime.of(startDateDatePicker.getValue(), LocalTime.parse(startTimeTextField.getText(), timeFormatter));
-            endDateTime = LocalDateTime.of(endDateDatePicker.getValue(), LocalTime.parse(endTimeTextField.getText(), timeFormatter));
+            startDateTime = LocalDateTime.of(startDateDatePicker.getValue(), LocalTime.parse(startTimeTextField.getText(), getTimeFormatter()));
+            endDateTime = LocalDateTime.of(endDateDatePicker.getValue(), LocalTime.parse(endTimeTextField.getText(), getTimeFormatter()));
         } catch (DateTimeParseException e) {
             return;
         }
@@ -130,15 +131,6 @@ public class AddShowingController implements Initializable {
         }
     }
 
-    private void showSuccessPopup(String message) {
-        // Toon een melding aan de gebruiker om te bevestigen dat de actie is geslaagd
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Action successful");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
     private boolean checkValitInput(String title) {
         // Controleer dat er een titel is opgegeven, zo niet geef een foutmelding
         if (title.isEmpty()) {
@@ -150,9 +142,7 @@ public class AddShowingController implements Initializable {
 
     private void openManageShowingsScreen() throws IOException {
         // Open het scherm voor het beheren van de voorstellingen in de VBox
-        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("manage-showings-view.fxml"));
-        VBox vBox = fxmlLoader.load();
-        mainScreenVBox.getChildren().setAll(vBox);
+        FXMLLoader fxmlLoader = loadShowingsVBox(mainScreenVBox, "manage-showings-view.fxml");
         ManageShowingsController manageShowingsController = fxmlLoader.getController();
         manageShowingsController.giveData(this.database);
     }
@@ -195,10 +185,9 @@ public class AddShowingController implements Initializable {
             validTimeTextField(startTimeTextField);
             if (startTimeTextField.getText() != null && this.mode.equals(Screen.ADD)) {
                 try {
-                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-                    LocalTime startTime = LocalTime.parse(startTimeTextField.getText(), timeFormatter);
+                    LocalTime startTime = LocalTime.parse(startTimeTextField.getText(), getTimeFormatter());
                     LocalTime endTime = startTime.plusMinutes(DURATION_SHOW);
-                    endTimeTextField.setText(endTime.format(timeFormatter));
+                    endTimeTextField.setText(endTime.format(getTimeFormatter()));
                 } catch (DateTimeParseException e) {}
             }
         });
@@ -210,8 +199,7 @@ public class AddShowingController implements Initializable {
     private void validDateDatePicker(DatePicker datePicker) {
         // Geef een melding weer op het moment dat een verkeert format van de datum is ingevoerd
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            formatter.parse(datePicker.getEditor().getText());
+            LocalDate.parse(datePicker.getEditor().getText(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
             invalidDataMessage.setVisible(false);
             datePicker.setStyle("");
         } catch (DateTimeParseException e) {
@@ -223,14 +211,17 @@ public class AddShowingController implements Initializable {
     private void validTimeTextField(TextField textField) {
         // Geeft een melding weer op het moment dat een verkeert format van de datum is ingevoerd
         try {
-            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-            LocalTime.parse(textField.getText(), timeFormatter);
+            LocalTime.parse(textField.getText(), getTimeFormatter());
             invalidDataMessage.setVisible(false);
             textField.setStyle("");
         } catch (Exception exception) {
             displayErrorMessage("Incorrect format time, use HH:MM. Such as 13:15.");
             textField.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
         }
+    }
+
+    private DateTimeFormatter getTimeFormatter() {
+        return DateTimeFormatter.ofPattern("HH:mm");
     }
 
     private boolean timeAndDateOfPast(LocalDateTime dateTime) {

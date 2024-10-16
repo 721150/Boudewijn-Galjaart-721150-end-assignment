@@ -6,13 +6,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
-import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartApplication;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.enums.Screen;
+import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.interfaces.Controller;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Show;
 
@@ -20,7 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ManageShowingsController implements Initializable {
+public class ManageShowingsController implements Initializable, Controller {
     @FXML
     private VBox mainScreenVBox;
 
@@ -48,13 +47,19 @@ public class ManageShowingsController implements Initializable {
     @FXML
     protected void addShowingButtonClick(ActionEvent actionEvent) throws IOException {
         // Toon het scherm voor het toevoegen van een voorstelling in de VBox
-        loadShowingsVBox(null, Screen.ADD);
+        loadAddVBox(null, Screen.ADD);
     }
 
     @FXML
     protected void editShowingButtonClick(ActionEvent actionEvent) throws IOException {
         // Toon het scherm voor het bewerken van een voorstelling in de VBox
-        loadShowingsVBox(getSelectedItem(), Screen.EDIT);
+        loadAddVBox(getSelectedItem(), Screen.EDIT);
+    }
+
+    private void loadAddVBox(Show SelectedItem, Screen edit) throws IOException {
+        FXMLLoader fxmlLoader = loadShowingsVBox(mainScreenVBox, "add-showing-view.fxml");
+        AddShowingController addShowingController = fxmlLoader.getController();
+        addShowingController.giveData(this.database, SelectedItem, edit);
     }
 
     @FXML
@@ -72,27 +77,9 @@ public class ManageShowingsController implements Initializable {
         }
     }
 
-    private void showSuccessPopup(String message) {
-        // Toon een melding aan de gebruiker om te bevestigen dat de actie is geslaagd
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Action successful");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
     private Show getSelectedItem() {
         // Haal de geselecteerde voorstelling op uit de tabel
         return (Show) showingsTableInformationTebleView.getSelectionModel().getSelectedItem();
-    }
-
-    private void loadShowingsVBox(Show show, Screen screen) throws IOException {
-        // Toon het scherm in de VBox
-        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("add-showing-view.fxml"));
-        VBox vBox = fxmlLoader.load();
-        mainScreenVBox.getChildren().setAll(vBox);
-        AddShowingController addShowingController = fxmlLoader.getController();
-        addShowingController.giveData(this.database, show, screen);
     }
 
     @Override
