@@ -33,10 +33,10 @@ public class Database implements Serializable {
 
         // Aanmaken van de klanten en kooptijd
         LocalDateTime byDateTime = LocalDateTime.of(2024, 10, 11, 16, 30);
-        Customer customerOne = new Customer("Bart", "Sneek", byDateTime);
-        Customer customerTwo = new Customer("Bob", "Meskers", byDateTime);
-        Customer customerThree = new Customer("David", "Davidson", byDateTime);
-        Customer customerFour = new Customer("Alice", "Wonderland", byDateTime);
+        CustomerSeat customerOne = new CustomerSeat("Bart", "Sneek", byDateTime);
+        CustomerSeat customerTwo = new CustomerSeat("Bob", "Meskers", byDateTime);
+        CustomerSeat customerThree = new CustomerSeat("David", "Davidson", byDateTime);
+        CustomerSeat customerFour = new CustomerSeat("Alice", "Wonderland", byDateTime);
 
         // Voeg klanten toe aan de voorstellingen
         this.shows.get(0).addCustomer(customerOne, 5, 1);

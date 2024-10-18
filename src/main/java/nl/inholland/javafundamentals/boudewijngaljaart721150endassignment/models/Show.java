@@ -6,19 +6,22 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Show implements Serializable {
+    private final int NUMBER_OF_rows = 6;
+    private final int NUMBER_OF_columns = 12;
+
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private String title;
-    private Customer[][] seats;
+    private CustomerSeat[][] seats;
 
     public Show(LocalDateTime startDateTime, LocalDateTime endDateTime, String title) {
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.title = title;
-        this.seats = new Customer[6][12];
+        this.seats = new CustomerSeat[NUMBER_OF_rows][NUMBER_OF_columns];
     }
 
-    public Show(LocalDateTime startDateTime, LocalDateTime endDateTime, String title, Customer[][] seats) {
+    public Show(LocalDateTime startDateTime, LocalDateTime endDateTime, String title, CustomerSeat[][] seats) {
         this(startDateTime, endDateTime, title);
         this.seats = seats;
     }
@@ -58,7 +61,7 @@ public class Show implements Serializable {
         return this.title;
     }
 
-    public Customer[][] getSeats() {
+    public CustomerSeat[][] getSeats() {
         // Geef de verzameling van zitplaatsen terug
         return this.seats;
     }
@@ -66,8 +69,8 @@ public class Show implements Serializable {
     public int getNumberOfSeatsLeft() {
         // Bereken het aantal vrije stoelen en geef dit terug
         int numberOfSeatsLeft = 0;
-        for (Customer[] row : this.seats) {
-            for (Customer seat : row) {
+        for (CustomerSeat[] row : this.seats) {
+            for (CustomerSeat seat : row) {
                 if (seat == null) {
                     numberOfSeatsLeft += 1;
                 }
@@ -84,8 +87,8 @@ public class Show implements Serializable {
     public int getTotalNumberOfSeats() {
         // Bereken het aantal stoelen en geef dit terug
         int numberOfSeats = 0;
-        for (Customer[] row : this.seats) {
-            for (Customer seat : row) {
+        for (CustomerSeat[] row : this.seats) {
+            for (CustomerSeat seat : row) {
                 numberOfSeats += 1;
             }
         }
@@ -97,7 +100,7 @@ public class Show implements Serializable {
         return this.startDateTime.format(getDateTimeFormatter()) + " " + this.title;
     }
 
-    public void addCustomer(Customer customer, int row, int col) {
+    public void addCustomer(CustomerSeat customer, int row, int col) {
         // Voeg een klant toe aan de voorstelling op de opgegeven positie
         if (this.seats[row][col] == null) {
             this.seats[row][col] = customer;

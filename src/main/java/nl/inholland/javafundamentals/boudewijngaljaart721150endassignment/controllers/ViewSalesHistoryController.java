@@ -6,12 +6,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
-import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Customer;
+import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.CustomerSeat;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Show;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.TicketInformation;
 
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -26,7 +27,12 @@ public class ViewSalesHistoryController implements Initializable {
 
     public void giveData(Database database) {
         this.database = database;
+        loadScreen();
+    }
+
+    private void loadScreen() {
         makeCustomerShowing();
+        sortHistoryByStartDateTime();
     }
 
     @Override
@@ -36,17 +42,17 @@ public class ViewSalesHistoryController implements Initializable {
     }
 
     private void makeCustomerShowing() {
-        // Maak een overzicht van de verkochte kaartjes en toon deze
+        // Maak een overzicht van de verkochte kaartjes en toon deze (door middel van het ophalen van de gegevens uit alle voorstellingen)
         for (Show show : this.database.getShows()) {
-            for (Customer[] row : show.getSeats()) {
-                for (Customer customer : row) {
+            for (CustomerSeat[] row : show.getSeats()) {
+                for (CustomerSeat customer : row) {
                     addCustomerToShowing(show, customer);
                 }
             }
         }
     }
 
-    private void addCustomerToShowing(Show show, Customer customer) {
+    private void addCustomerToShowing(Show show, CustomerSeat customer) {
         // Voeg de klant toe aan de verzameling die wordt getoont op het scherm
         if (customer != null) {
             Optional<TicketInformation> existingOverview = this.customerShow.stream().filter(ticketOverview -> ticketOverview.getCustomerName().equals(customer.getFullName()) && ticketOverview.getShowTitle().equals(show.getstartTimeDateAndTitle())).findFirst();
@@ -56,5 +62,10 @@ public class ViewSalesHistoryController implements Initializable {
                 this.customerShow.add(new TicketInformation(customer.getFullName(), show.getstartTimeDateAndTitle(), customer.getDateTimeofBuyTicket().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), 1));
             }
         }
+    }
+
+    private void sortHistoryByStartDateTime() {
+        // Sorteer de verkoopgeschiedenis op de begin datum/tijd
+        FXCollections.sort(this.customerShow, Comparator.comparing(TicketInformation::getDateTimeofBuyTicket).reversed());
     }
 }

@@ -209,20 +209,28 @@ public class AddShowingController implements Initializable, Controller {
             validDateDatePicker(endDateDatePicker);
         });
 
-        // Voeg een foutafhandeling toe voor wanneer een foute tijd wordt ingevoerd
+        // Voeg een foutafhandeling toe voor wanneer een foute tijd wordt ingevoerd en stel de eindtijd van de voorstelling in
         startTimeTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             validTimeTextField(startTimeTextField);
-            if (startTimeTextField.getText() != null && this.mode.equals(Screen.ADD)) {
-                try {
-                    LocalTime startTime = LocalTime.parse(startTimeTextField.getText(), getTimeFormatter());
-                    LocalTime endTime = startTime.plusMinutes(DURATION_SHOW);
-                    endTimeTextField.setText(endTime.format(getTimeFormatter()));
-                } catch (DateTimeParseException e) {}
-            }
+            calculateEndTime();
         });
         endTimeTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             validTimeTextField(endTimeTextField);
         });
+    }
+
+    private void calculateEndTime() {
+        // Bepaal de eindtijd van de voorstelling
+        if (startTimeTextField.getText() != null && this.mode.equals(Screen.ADD)) {
+            try {
+                LocalTime startTime = LocalTime.parse(startTimeTextField.getText(), getTimeFormatter());
+                LocalTime endTime = startTime.plusMinutes(DURATION_SHOW);
+                if (startTime.isAfter(LocalTime.of(21, 29))) {
+                    endTime = LocalTime.of(23,59);
+                }
+                endTimeTextField.setText(endTime.format(getTimeFormatter()));
+            } catch (DateTimeParseException e) {}
+        }
     }
 
     private void validDateDatePicker(DatePicker datePicker) {
@@ -233,8 +241,12 @@ public class AddShowingController implements Initializable, Controller {
         }
         else {
             displayErrorMessage("Incorrect format date, use DD-MM-YYYY. Such as 12-04-2024.");
-            datePicker.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+            datePicker.setStyle(getStyle());
         }
+    }
+
+    private static String getStyle() {
+        return "-fx-border-color: red; -fx-border-width: 2px;";
     }
 
     private void validTimeTextField(TextField textField) {
@@ -245,7 +257,7 @@ public class AddShowingController implements Initializable, Controller {
         }
         else {
             displayErrorMessage("Incorrect format time, use HH:MM. Such as 13:15.");
-            textField.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+            textField.setStyle(getStyle());
         }
     }
 

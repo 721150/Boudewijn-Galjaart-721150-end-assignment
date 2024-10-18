@@ -15,7 +15,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.interfaces.Controller;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
-import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Customer;
+import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.CustomerSeat;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Show;
 
 import java.io.IOException;
@@ -166,7 +166,7 @@ public class SeatsSellTicketsController implements Initializable, Controller {
     @FXML
     protected void sellButtonClick(ActionEvent event) throws IOException {
         // Haal de geselecteerde positie op en voeg deze toe aan de "database"
-        Customer customer = new Customer(firstnameCustomerTextField.getText(), lastnameCustomerTextField.getText(), LocalDateTime.now());
+        CustomerSeat customer = new CustomerSeat(firstnameCustomerTextField.getText(), lastnameCustomerTextField.getText(), LocalDateTime.now());
         List<int[]> selectedSeatsPositions = getSelectedSeatsPositions();
         Show show = this.show;
         for (int[] position : selectedSeatsPositions) {
