@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.StartApplication;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.interfaces.Controller;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.CustomerSeat;
@@ -169,12 +170,46 @@ public class SeatsSellTicketsController implements Initializable, Controller {
         CustomerSeat customer = new CustomerSeat(firstnameCustomerTextField.getText(), lastnameCustomerTextField.getText(), LocalDateTime.now());
         List<int[]> selectedSeatsPositions = getSelectedSeatsPositions();
         Show show = this.show;
+
+        if (this.show.getAtLeastSixteenYearOld() == true) {
+            if (showCheckAgeDialog(this.show, customer.getFullName(), this.selectedSeatsCount) == false) {
+                return;
+            }
+        }
+
         for (int[] position : selectedSeatsPositions) {
             show.addCustomer(customer, position[0] - 1, position[1] - 1);
             this.database.editShow(this.show, show);
         }
         showSuccessPopup("Selling " + this.selectedSeatsCount + " ticket(s) to " + customer.getFullName() + " was successful.");
         openManageShowingsScreen();
+    }
+
+    private boolean showCheckAgeDialog(Show show, String customerName, int numberOfTickets) {
+        // Toon het dialoogvenster voor de leeftijdsverivicatie
+        try {
+            FXMLLoader loader = new FXMLLoader(StartApplication.class.getResource("check-age-customer-view.fxml"));
+            VBox dialogContent = loader.load();
+            CheckAgeCustomerController controller = loader.getController();
+            controller.giveData(show, customerName, numberOfTickets);
+            Dialog<Boolean> dialog = new Dialog<>();
+            dialog.setTitle("Check Age");
+            dialog.getDialogPane().setContent(dialogContent);
+
+            dialog.showingProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                    if (!newValue) {
+                        dialog.setResult(controller.informationCheck());
+                    }
+                }
+            });
+
+            return dialog.showAndWait().orElse(false);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @FXML

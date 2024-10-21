@@ -50,6 +50,9 @@ public class AddShowingController implements Initializable, Controller {
     @FXML
     private Button addShowingsButton;
 
+    @FXML
+    private CheckBox movieFromSixteenYearCheckBox;
+
     private Database database;
 
     private Show show;
@@ -86,6 +89,7 @@ public class AddShowingController implements Initializable, Controller {
     private void handleAddOrEdit() throws IOException {
         String title = titleTextField.getText();
         LocalDateTime startDateTime; LocalDateTime endDateTime;
+        boolean isAtLeastSixteenYearOld = movieFromSixteenYearCheckBox.isSelected();
 
         if (checkValitInput(title)) {
             return;
@@ -108,7 +112,7 @@ public class AddShowingController implements Initializable, Controller {
             return;
         }
 
-        addShowToDatabase(startDateTime, endDateTime, title);
+        addShowToDatabase(startDateTime, endDateTime, title, isAtLeastSixteenYearOld);
         openManageShowingsScreen();
     }
 
@@ -117,15 +121,15 @@ public class AddShowingController implements Initializable, Controller {
         invalidDataMessage.setText(message);
     }
 
-    private void addShowToDatabase(LocalDateTime startDateTime, LocalDateTime endDateTime, String title) {
+    private void addShowToDatabase(LocalDateTime startDateTime, LocalDateTime endDateTime, String title, boolean isAtLeatSixteenYearOld) {
         // Maak een nieuwe voorstelling aan of wijzig deze in de "database"
         if (this.mode.equals(Screen.ADD)) {
-            Show newShow = new Show(startDateTime, endDateTime, title);
+            Show newShow = new Show(startDateTime, endDateTime, title, isAtLeatSixteenYearOld);
             this.database.addShow(newShow);
             showSuccessPopup("Show \"" + newShow.getTitle() +"\" successfully added");
         }
         else if (this.mode.equals(Screen.EDIT)) {
-            Show editShow = new Show(startDateTime, endDateTime, title, this.show.getSeats());
+            Show editShow = new Show(startDateTime, endDateTime, title, this.show.getSeats(), isAtLeatSixteenYearOld);
             this.database.editShow(this.show, editShow);
             showSuccessPopup("Show \"" + editShow.getTitle() + "\" successfully changed");
         }
@@ -182,6 +186,7 @@ public class AddShowingController implements Initializable, Controller {
         endTimeTextField.setText(this.show.getEndTime());
         startDateDatePicker.setValue(this.show.getStartDate());
         endDateDatePicker.setValue(this.show.getEndDate());
+        movieFromSixteenYearCheckBox.setSelected(this.show.getAtLeastSixteenYearOld());
     }
 
     private void loadEditScreen() {

@@ -14,13 +14,30 @@
         <URL value="@css/style.css" />
     </stylesheets>
     <children>
-        <Label fx:id="sellTicketsTitleLabel" prefHeight="43.0" prefWidth="271.0" text="Sell tickets">
-            <VBox.margin>
-                <Insets left="15.0" />
-            </VBox.margin>
-            <padding>
-                <Insets bottom="15.0" top="15.0" />
-            </padding></Label>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+              <Label fx:id="sellTicketsTitleLabel" prefHeight="43.0" prefWidth="271.0" text="Sell tickets">
+                  <padding>
+                      <Insets bottom="15.0" top="15.0" />
+                  </padding>
+            </Label>
+            <Label text="Search:">
+               <HBox.margin>
+                  <Insets bottom="15.0" left="400.0" top="17.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets top="3.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="searchTextField" promptText="Enter (part of) the title">
+               <HBox.margin>
+                  <Insets bottom="15.0" left="5.0" top="17.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+         <padding>
+            <Insets left="15.0" />
+         </padding></HBox>
         <Label fx:id="roomNumberLabel" prefHeight="17.0" prefWidth="870.0" text="Room 1">
             <VBox.margin>
                 <Insets left="15.0" right="15.0" />
@@ -72,7 +89,7 @@
                   </Label>
                </children>
             </HBox>
-            <Button fx:id="selectSeatsButton" onAction="#selectSeatsButtonAction" disable="true" mnemonicParsing="false" text="Selected seat(s)">
+            <Button fx:id="selectSeatsButton" disable="true" mnemonicParsing="false" onAction="#selectSeatsButtonAction" text="Selected seat(s)">
                <VBox.margin>
                   <Insets left="15.0" />
                </VBox.margin>

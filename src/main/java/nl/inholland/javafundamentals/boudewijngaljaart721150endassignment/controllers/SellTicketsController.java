@@ -2,6 +2,7 @@ package nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.contr
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.interfaces.Controller;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
@@ -32,14 +34,19 @@ public class SellTicketsController implements Initializable, Controller {
     @FXML
     private VBox mainScreenVBox;
 
+    @FXML
+    private TextField searchTextField;
+
     private Database database;
 
     private ObservableList<Show> shows = FXCollections.observableArrayList();
+    private FilteredList<Show> filteredShows;
 
     public void giveData(Database database) {
         this.database = database;
         this.shows.setAll(this.database.getCurrentShows());
         sortShowsByStartDateTime();
+        filteredShows = new FilteredList<>(this.shows, p -> true);
     }
 
     private void sortShowsByStartDateTime() {
@@ -50,7 +57,8 @@ public class SellTicketsController implements Initializable, Controller {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Toon de voorstellingen in de tabel
-        showingsTableInformationTebleView.setItems(this.shows);
+        filteredShows = new FilteredList<>(this.shows, p -> true);
+        showingsTableInformationTebleView.setItems(this.filteredShows);
 
         // Zorg ervoor dat de knoppen weizigen en verwijderen alleen werken als er een item is geselecteerd en dat de informatie van een geselecteerde voorstelling wordt weergeven
         showingsTableInformationTebleView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -60,6 +68,18 @@ public class SellTicketsController implements Initializable, Controller {
             } else {
                 selectSeatsButton.setDisable(true);
             }
+        });
+
+        // Zorg ervoor dat de ingevoede zoekopdracht wordt uitgevoerd
+        searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredShows.setPredicate(show -> {
+                if (newValue == null || newValue.length() < 3) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                return show.getTitle().toLowerCase().contains(lowerCaseFilter);
+            });
+            showingsTableInformationTebleView.setItems(this.filteredShows);
         });
     }
 

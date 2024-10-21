@@ -13,16 +13,18 @@ public class Show implements Serializable {
     private LocalDateTime endDateTime;
     private String title;
     private CustomerSeat[][] seats;
+    private boolean atLeastSixteenYearOld;
 
-    public Show(LocalDateTime startDateTime, LocalDateTime endDateTime, String title) {
+    public Show(LocalDateTime startDateTime, LocalDateTime endDateTime, String title, boolean isAtLeastSixteenYearOld) {
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.title = title;
         this.seats = new CustomerSeat[NUMBER_OF_rows][NUMBER_OF_columns];
+        this.atLeastSixteenYearOld = isAtLeastSixteenYearOld;
     }
 
-    public Show(LocalDateTime startDateTime, LocalDateTime endDateTime, String title, CustomerSeat[][] seats) {
-        this(startDateTime, endDateTime, title);
+    public Show(LocalDateTime startDateTime, LocalDateTime endDateTime, String title, CustomerSeat[][] seats, boolean atLeastSixteenYearOld) {
+        this(startDateTime, endDateTime, title, atLeastSixteenYearOld);
         this.seats = seats;
     }
 
@@ -113,5 +115,15 @@ public class Show implements Serializable {
 
     private DateTimeFormatter getDateTimeFormatter() {
         return DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    }
+
+    public boolean getAtLeastSixteenYearOld() {
+        // Geef terug of er een minimale leeftijd van 16 jaar is
+        return atLeastSixteenYearOld;
+    }
+
+    public void setAtLeastSixteenYearOld(boolean atLeastSixteenYearOld) {
+        // Verander de minimale leeftijd van 16 jaar
+        this.atLeastSixteenYearOld = atLeastSixteenYearOld;
     }
 }

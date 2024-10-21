@@ -10,11 +10,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.enums.Screen;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.interfaces.Controller;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.data.Database;
 import nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.models.Show;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -99,4 +102,25 @@ public class ManageShowingsController implements Initializable, Controller {
         });
     }
 
+    @FXML
+    protected void exportShowingButtonClick(ActionEvent actionEvent) {
+        // Laat de gebruiker de gegevens van de voorstellingen opslaan als CSV op een zelf gekozen plaats met zelfgekozen bestandsnaam
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Showings");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+        File file = fileChooser.showSaveDialog(mainScreenVBox.getScene().getWindow());
+        if (file != null) {
+            try (FileWriter writer = new FileWriter(file)) {
+                writer.append("start datetime,end datetime,movie title,seats left\n");
+                for (Show show : shows) {
+                    writer.append(show.getStartDateTime().toString()).append(",");
+                    writer.append(show.getEndDateTime().toString()).append(",");
+                    writer.append(show.getTitle()).append(",");
+                    writer.append(String.valueOf(show.getNumberOfSeatsLeft())).append("\n");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

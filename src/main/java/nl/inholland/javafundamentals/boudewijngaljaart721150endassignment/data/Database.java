@@ -22,14 +22,14 @@ public class Database implements Serializable {
         this.users.add(new SalesPerson("John", "Doe", "jdoe", "%7agIIAd8"));
 
         // Voeg de voorstellingen toe aan de "database" van het systeem
-        this.shows.add(new Show(LocalDateTime.of(2024, 10, 4, 16, 30), LocalDateTime.of(2024, 10, 4, 19, 0), "Rebel Moon - Part two: The Scargiver"));
-        this.shows.add(new Show(LocalDateTime.of(2024, 10, 5, 20, 0), LocalDateTime.of(2024, 10, 5, 22, 30), "Captain America: Brave New World"));
-        this.shows.add(new Show(LocalDateTime.of(2024, 12, 3, 15, 0), LocalDateTime.of(2024, 12, 3, 17, 30), "Venom: The Last Dance"));
-        this.shows.add(new Show(LocalDateTime.of(2024, 11, 1, 18, 0), LocalDateTime.of(2024, 11, 1, 20, 30), "Dune: Part Two"));
-        this.shows.add(new Show(LocalDateTime.of(2024, 11, 10, 14, 0), LocalDateTime.of(2024, 11, 10, 16, 30), "Avatar: The Way of Water"));
-        this.shows.add(new Show(LocalDateTime.of(2024, 11, 15, 19, 0), LocalDateTime.of(2024, 11, 15, 21, 30), "The Batman"));
-        this.shows.add(new Show(LocalDateTime.of(2024, 12, 1, 17, 0), LocalDateTime.of(2024, 12, 1, 19, 30), "Spider-Man: No Way Home"));
-        this.shows.add(new Show(LocalDateTime.of(2024, 12, 10, 20, 0), LocalDateTime.of(2024, 12, 10, 22, 30), "The Matrix Resurrections"));
+        this.shows.add(new Show(LocalDateTime.of(2024, 10, 4, 16, 30), LocalDateTime.of(2024, 10, 4, 19, 0), "Rebel Moon - Part two: The Scargiver", false));
+        this.shows.add(new Show(LocalDateTime.of(2024, 10, 5, 20, 0), LocalDateTime.of(2024, 10, 5, 22, 30), "Captain America: Brave New World", false));
+        this.shows.add(new Show(LocalDateTime.of(2024, 12, 3, 15, 0), LocalDateTime.of(2024, 12, 3, 17, 30), "Venom: The Last Dance", false));
+        this.shows.add(new Show(LocalDateTime.of(2024, 11, 1, 18, 0), LocalDateTime.of(2024, 11, 1, 20, 30), "Dune: Part Two", false));
+        this.shows.add(new Show(LocalDateTime.of(2024, 11, 10, 14, 0), LocalDateTime.of(2024, 11, 10, 16, 30), "Avatar: The Way of Water", false));
+        this.shows.add(new Show(LocalDateTime.of(2024, 11, 15, 19, 0), LocalDateTime.of(2024, 11, 15, 21, 30), "The Batman", false));
+        this.shows.add(new Show(LocalDateTime.of(2024, 12, 1, 17, 0), LocalDateTime.of(2024, 12, 1, 19, 30), "Spider-Man: No Way Home", false));
+        this.shows.add(new Show(LocalDateTime.of(2024, 12, 10, 20, 0), LocalDateTime.of(2024, 12, 10, 22, 30), "The Matrix Resurrections", false));
 
         // Aanmaken van de klanten en kooptijd
         LocalDateTime byDateTime = LocalDateTime.of(2024, 10, 11, 16, 30);

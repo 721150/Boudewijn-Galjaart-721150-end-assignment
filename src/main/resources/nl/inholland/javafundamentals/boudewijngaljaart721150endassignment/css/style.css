@@ -1,5 +1,5 @@
 /* De achtergrond- en tekstkleur van de loginknop, toevoegen knop en tonen knop instellen */
-#loginButton, #addShowingButton, #selectSeatsButton, #sellSeatsTicketsButton {
+#loginButton, #addShowingButton, #selectSeatsButton, #sellSeatsTicketsButton, #confirmButton {
     -fx-background-color: #1E90FF;
     -fx-text-fill: #FFFFFF;
 }
@@ -43,7 +43,7 @@
 }
 
 /* De tekstkleur en grootte van de welkomsttekst en schermtekst instellen*/
-#welcomeMassageWhiteName, #manageShowingsTitleLabel, #addShowingTitleLabel, #sellTicketsTitleLabel, #viewSalesHistoryTitleLabel {
+#welcomeMassageWhiteName, #manageShowingsTitleLabel, #addShowingTitleLabel, #sellTicketsTitleLabel, #viewSalesHistoryTitleLabel, #checkAgeTitleLabel {
     -fx-text-fill :#737474;
     -fx-font-size: 24.0;
 }
@@ -60,7 +60,7 @@
 }
 
 /* De achtergrondkleur van de bewerken knop instellen */
-#editShowingButton, #cancelButton {
+#editShowingButton, #cancelButton, #exportButton {
     -fx-background-color: #737474;
 }
 
@@ -80,6 +80,6 @@
 }
 
 /* De tekst ved instellen */
-#informationAboutSelectedShowLabel {
+#informationAboutSelectedShowLabel, #movieLabel, #dateTimeLabel, #numberTicketsLabel, #nameLabel {
     -fx-font-weight: bold;
 }

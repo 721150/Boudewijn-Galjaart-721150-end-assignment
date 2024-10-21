@@ -67,7 +67,12 @@
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin></Button>
-            <Label fx:id="deleteFailMessage" visible="false" text="Cannot remove show, tickets for this show are as sold.">
+            <Button fx:id="exportButton" onAction="#exportShowingButtonClick" mnemonicParsing="false" text="Export showings">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+            </Button>
+            <Label fx:id="deleteFailMessage" text="Cannot remove show, tickets for this show are as sold." visible="false">
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin>

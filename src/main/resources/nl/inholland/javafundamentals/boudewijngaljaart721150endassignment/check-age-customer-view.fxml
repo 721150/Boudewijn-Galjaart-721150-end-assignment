@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="200.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.inholland.javafundamentals.boudewijngaljaart721150endassignment.controllers.CheckAgeCustomerController">
+    <stylesheets>
+        <URL value="@css/style.css" />
+    </stylesheets>
+    <children>
+      <Label fx:id="checkAgeTitleLabel" text="Age check required">
+         <VBox.margin>
+            <Insets bottom="15.0" left="15.0" top="15.0" />
+         </VBox.margin></Label>
+      <HBox>
+         <children>
+            <Label fx:id="movieLabel" text="Movie:">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin></Label>
+            <Label fx:id="titleOfMovieLabel" text="">
+               <HBox.margin>
+                  <Insets left="2.0" />
+               </HBox.margin></Label>
+         </children>
+      </HBox>
+       <HBox>
+           <children>
+               <Label fx:id="dateTimeLabel" text="Date and time:">
+               <HBox.margin>
+                  <Insets left="15.0" top="5.0" />
+               </HBox.margin></Label>
+               <Label fx:id="startDateTimeOfMovieLabel" text="">
+               <HBox.margin>
+                  <Insets left="2.0" top="5.0" />
+               </HBox.margin></Label>
+           </children>
+       </HBox>
+       <HBox>
+           <children>
+               <Label fx:id="numberTicketsLabel" text="Number of tickets:">
+               <HBox.margin>
+                  <Insets left="15.0" top="5.0" />
+               </HBox.margin></Label>
+               <Label fx:id="numberOfTicketsLabel" text="">
+               <HBox.margin>
+                  <Insets left="2.0" top="5.0" />
+               </HBox.margin></Label>
+           </children>
+       </HBox>
+       <HBox>
+           <children>
+               <Label fx:id="nameLabel" text="Customer name:">
+               <HBox.margin>
+                  <Insets left="15.0" top="5.0" />
+               </HBox.margin></Label>
+               <Label fx:id="customerNameLabel" text="">
+               <HBox.margin>
+                  <Insets left="2.0" top="5.0" />
+               </HBox.margin></Label>
+           </children>
+       </HBox>
+      <CheckBox fx:id="checkedAgeCheckBox" mnemonicParsing="false" text="I have cheched the ID card and confirmed that the customer is at least 16 years old">
+         <VBox.margin>
+            <Insets left="15.0" top="5.0" />
+         </VBox.margin></CheckBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#confirmButtonClicked" text="Confirm purchase">
+               <HBox.margin>
+                  <Insets left="15.0" top="5.0" />
+               </HBox.margin></Button>
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelButtonClicked" text="Cancel">
+               <HBox.margin>
+                  <Insets left="15.0" top="5.0" />
+               </HBox.margin></Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>
